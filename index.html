@@ -329,7 +329,7 @@ footer a{color:#F4E4B0; font-weight:700}
 /* TODO: replace with the rescue's real Facebook page / application link */
 const LINKS = {
   apply: "https://form.jotform.com/261266940400047",    // "Apply for Parole" — adoption application (JotForm)
-  page:  "https://www.facebook.com/",     // rescue's main page
+  page:  "https://www.facebook.com/profile.php?id=61582497165034",   // Last Chance Ranch on Facebook
   foster: "https://form.jotform.com/261407369955064",   // Foster application (JotForm)
   donate: "https://cash.app/$LastChanceRanchSC"          // "Post Bail" — Cash App
 };
@@ -517,7 +517,7 @@ async function runIntroSequence(nCells){
   const original = lede.innerHTML;
   const cancelled = () => { if (twRun !== run) { lede.innerHTML = original; lede.classList.remove("tw-hide","tw-cursor"); return true; } return false; };
   const skip = () => { if (twRun === run) { twRun++; lede.innerHTML = original; finish(); } };
-  stage.addEventListener("click", skip, { once: true });
+  armSkip(skip);
 
   await sleep(450); if (cancelled()) return;          // paper drops in
   on(".rule.draw");
@@ -562,7 +562,7 @@ async function runQuestionTypewriter(nAnswers){
   const original = q.innerHTML;
   const cancelled = () => { if (twRun !== run) { q.innerHTML = original; q.classList.remove("tw-hide","tw-cursor"); return true; } return false; };
   const skip = () => { if (twRun === run) { twRun++; q.innerHTML = original; finishAll(); } };
-  stage.addEventListener("click", skip, { once: true });
+  armSkip(skip);
   await sleep(150); if (cancelled()) return;
   await typeInto(q, run, 22); if (cancelled()) return;
   ding(); await sleep(200);
@@ -794,6 +794,8 @@ function stampSound(){             // rubber stamp thud
   src.connect(f); f.connect(g); g.connect(c.destination); src.start();
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+/* arm "tap to skip" on the next tick so the click that opened this screen can't skip it */
+const armSkip = fn => setTimeout(() => stage.addEventListener("click", fn, { once: true }), 0);
 
 /* type an element's content in place, preserving inline tags */
 async function typeInto(el, run, cps){
@@ -837,7 +839,7 @@ async function runTypewriter(){
   const originals = new Map(targets.map(e => [e, e.innerHTML]));
   const restoreIfCancelled = () => { if (twRun !== run) { originals.forEach((html, e) => { e.innerHTML = html; e.classList.remove("tw-hide","tw-cursor"); }); return true; } return false; };
   const skip = () => { if (twRun === run) { twRun++; originals.forEach((html, e) => { e.innerHTML = html; }); finishAll(); } };
-  stage.addEventListener("click", skip, { once: true });
+  armSkip(skip);
 
   await sleep(350); if (restoreIfCancelled()) return;
   showStep(0); stampSound();

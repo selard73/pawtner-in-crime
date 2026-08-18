@@ -35,7 +35,7 @@ key: { num, name, aka, rank, breed, sex, age, weight, status,
 - `apply` — adoption application (JotForm) → "Apply for Parole Today"
 - `foster` — foster application (JotForm)
 - `donate` — Cash App → "Post Bail"
-- `page` — **TODO: rescue's Facebook page URL**
+- `page` — Last Chance Ranch Facebook page
 
 Contact shown on the result: (803) 479-8408 · lastchanceranchofsc@gmail.com
 
