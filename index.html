@@ -189,7 +189,8 @@ h1:focus,h2:focus{outline:none}
   background-image:repeating-linear-gradient(0deg, transparent 0 22px, var(--wall-line) 22px 24px);
   box-shadow:inset 0 0 30px rgba(0,0,0,.25);
 }
-.mug img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.mug img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; display:block}
+.mug.has .ticks,.mug.has .sil,.mug.has .sign{display:none}
 .mug .ticks{position:absolute; left:6px; top:8px; bottom:0; font-family:var(--cond); font-weight:700; font-size:.6rem; color:var(--ink); line-height:24px}
 .mug .ticks i{display:block; font-style:normal}
 .mug .sil{position:absolute; left:50%; bottom:22%; transform:translateX(-50%); font-size:5.2rem; opacity:.55; filter:grayscale(1) contrast(1.4)}
@@ -633,7 +634,7 @@ function mugshot(key, d){
   return `<div class="mug">
     <div class="ticks" aria-hidden="true"><i>2'2"</i><i>2'1"</i><i>2'0"</i><i>1'11"</i><i>1'10"</i><i>1'9"</i></div>
     <span class="sil" aria-hidden="true">🐕</span>
-    <img id="mugimg" src="${MUGS[key] || ""}" alt="Mugshot of ${d.name}" onerror="this.style.display='none'">
+    <img id="mugimg" src="${MUGS[key] || ""}" alt="Mugshot of ${d.name}" onload="this.parentNode.classList.add('has')" onerror="this.style.display='none'">
     <div class="sign"><small>Last Chance Ranch Prison</small><b>Inmate ${num}<br>${label}</b></div>
   </div>`;
 }
