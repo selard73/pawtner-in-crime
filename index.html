@@ -578,7 +578,7 @@ function pick(ai){
   if (picking) return;               // ignore double-clicks during the beat
   picking = true;
   answers[current] = ai;
-  ding();
+  pickDing();
   const btns = Array.from(document.querySelectorAll(".answer"));
   btns.forEach((b, i) => { b.classList.remove("later"); b.classList.add(i === ai ? "chosen" : "dim"); });
   const reduce = REDUCE ? 0 : 750;
@@ -739,7 +739,7 @@ function ensureAudio(){
 }
 /* Optional real samples: drop files in sounds/ (key.mp3|wav, ding.mp3|wav, stamp.mp3|wav). Falls back to synth if missing. */
 /* key1..key5 rotate randomly (real strikes never sound identical); key.* alone also works. */
-const SAMPLES = { key: [], ding: null, stamp: null, slam: null };
+const SAMPLES = { key: [], ding: null, stamp: null, slam: null, pick: null };
 (function loadSamples(){
   const c = (() => { try { return new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return null; } })();
   if (!c) return; actx = c;
@@ -750,6 +750,7 @@ const SAMPLES = { key: [], ding: null, stamp: null, slam: null };
   load("ding").then(b => { if (b) SAMPLES.ding = b; });
   load("stamp").then(b => { if (b) SAMPLES.stamp = b; });
   load("slam").then(b => { if (b) SAMPLES.slam = b; });
+  load("pick").then(b => { if (b) SAMPLES.pick = b; });
 })();
 function playSample(name, gainVal, rateJitter){
   const c = ensureAudio(); if (!c) return false;
@@ -798,6 +799,23 @@ function ding(){                   // carriage-return bell
 }
 function slamSound(){              // heavy stamp: INMATE FILE, title, WANTED, GOOD BOY, Book Me
   if (playSample("slam", 1, 0.04)) return; stampSound();
+}
+function pickDing(){               // desk-bell DING when an answer is chosen
+  if (playSample("pick", 0.9, 0)) return;
+  const c = ensureAudio(); if (!c) return;
+  const t = c.currentTime, out = c.createGain(); out.gain.value = 0.35; out.connect(c.destination);
+  // bell partials (inharmonic like a real desk bell)
+  [[1568, 1, 1.1], [3140, 0.45, 0.7], [4650, 0.22, 0.45], [2370, 0.3, 0.6]].forEach(([f, a, d]) => {
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = "sine"; o.frequency.value = f;
+    g.gain.setValueAtTime(a, t); g.gain.exponentialRampToValueAtTime(0.0005, t + d);
+    o.connect(g); g.connect(out); o.start(t); o.stop(t + d + 0.05);
+  });
+  // strike transient
+  const len = Math.floor(c.sampleRate * 0.01), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+  const n = c.createBufferSource(); n.buffer = buf; const hp = c.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 3000;
+  const ng = c.createGain(); ng.gain.value = 0.5; n.connect(hp); hp.connect(ng); ng.connect(out); n.start(t);
 }
 function stampSound(){             // lighter thud: answer cards
   if (playSample("stamp", 0.9, 0.06)) return;
