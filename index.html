@@ -572,6 +572,7 @@ async function runQuestionTypewriter(nAnswers){
 }
 function pick(ai){
   answers[current] = ai;
+  ding();
   if (current + 1 < QUESTIONS.length) showQuestion(current + 1);
   else showInterstitial();
 }
