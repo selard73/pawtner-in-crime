@@ -223,7 +223,7 @@ h1:focus,h2:focus{outline:none}
 .report li::before{content:"🐾"; position:absolute; left:0; top:0; font-size:.75rem}
 .notes{font-family:var(--type); font-size:.93rem; line-height:1.6; color:var(--ink)}
 .notes p{margin-bottom:9px}
-.notes .parole{color:var(--red); font-weight:700}
+.notes .rec{color:var(--red); font-weight:700; white-space:nowrap}
 .reportwrap{display:flex; gap:12px; align-items:flex-start; justify-content:space-between}
 .reportwrap .stamp.round{flex:0 0 auto; margin-top:6px}
 
@@ -351,7 +351,7 @@ const DOGS = {
     notes:[
       "Inmate #39 has a past. The Warden won't confirm the details, but the file mentions one legendary bank job, a getaway that involved a parachute, and a landing nobody at the Ranch has stopped talking about. Oatmeal, for his part, has retired from the heist business and taken up a quieter line of work: greeting people at doors like every one of them is the score of a lifetime.",
       "In custody he has been a model inmate — gets along with dogs, gets along with cats, guards nothing but the doorway. He is still perfecting his house training and pulls a little on leash for the first block, then settles in like the pro he is. He doesn't need perfection. He needs a patient human and a soft place to land. He's had enough hard landings.",
-      "Booked 05/28/24. He has served his time. <span class='parole'>(PAROLE) is strongly recommended.</span>"],
+      "Booked 05/28/24. He has served his time. <span class='rec'>(PAROLE) is strongly recommended.</span>"],
     conditions:"Patient home willing to finish house training. Home-to-home adoption — keeps this inmate out of the shelter system." },
   blu: { num:"34", name:"Blue", aka:"Bleu", rank:"The Blue-Eyed Bandit · Yard Boss",
     breed:"Catahoula Leopard Dog / mixed breed", sex:"Neutered male", age:"Approx. 2+ years", weight:"52.5 lbs", status:"General Population — Maximum Security Snuggles Unit",
@@ -359,7 +359,7 @@ const DOGS = {
     notes:[
       "Inmate #34 is wanted in at least three counties for the same offense: making eye contact. Those eyes are ice-blue, they are legally a weapon, and Blue deploys them on every guard, volunteer, and visitor who comes down the row. Nobody has finished a shift without giving him a belly rub. Nobody.",
       "Blue is serving time for circumstances beyond his control. Despite his past, he has proven to be a model inmate — very social, friendly with people and dogs, and a full-tilt believer that every yard time is the best day of his life. He runs like he's being paid per lap.",
-      "He's ready for early release into a committed home with structure, exercise, and a couch he's technically not allowed on. <span class='parole'>(PAROLE) is recommended.</span>"],
+      "He's ready for early release into a committed home with structure, exercise, and a couch he's technically not allowed on. <span class='rec'>(PAROLE) is recommended.</span>"],
     conditions:"Approved adopter willing to provide structure, exercise, and a lifelong commitment." },
   isa: { num:"35", name:"Isaiah", aka:"", rank:"Snuggle Officer",
     breed:"Labrador Retriever", sex:"Neutered male", age:"1½ years", weight:"51 lbs", status:"General Population — Maximum Security Snuggles Unit",
@@ -367,7 +367,7 @@ const DOGS = {
     notes:[
       "Inmate #35 is what the file calls a smooth operator. Isaiah has stolen the hearts of staff and inmates alike with a charming personality, an irresistible smile, and cuddle skills that should honestly require a permit. He is always on his best behavior when treats or toys are involved — and he has figured out that treats or toys are always involved if he looks at you like that.",
       "He is friendly with people, friendly with dogs, and merely <em>interested</em> in cats, which around here counts as restraint. Assigned rank: Snuggle Officer. He takes the title seriously.",
-      "Isaiah is ready for parole into a loving forever home. <span class='parole'>(PAROLE) is highly recommended.</span>"],
+      "Isaiah is ready for parole into a loving forever home. <span class='rec'>(PAROLE) is highly recommended.</span>"],
     conditions:"Approved adopter willing to provide structure, exercise, treats, and a lifelong commitment." },
   fro: { num:"52", name:"Frodo", aka:"", rank:"Ringbearer · Head of Napping",
     breed:"Staffordshire Bull Terrier", sex:"Male", age:"Senior", weight:"", status:"Minimum Security — Eligible for Immediate Parole",
@@ -375,7 +375,7 @@ const DOGS = {
     notes:[
       "Meet Frodo, the bravest little hobbit this side of the Shire. Unlike his famous namesake, this Frodo has already completed his long journey and is ready to retire somewhere far more comfortable than Mordor. There has been some debate around the prison as to whether he is a Hobbit or a po-ta-to. The evidence is overwhelming: he is round, soft, happiest lounging, and has perfected the ancient art of doing absolutely nothing for hours at a time.",
       "While other inmates cause shenanigans, Frodo has dedicated himself to becoming the finest couch po-ta-to in the entire Shire. His parole requirements are simple: a warm lap, plenty of naps, daily cuddles, and someone who understands that every great hero deserves a peaceful ending to his story.",
-      "He's looking for his own Grey Havens. <span class='parole'>(PAROLE) is highly recommended.</span>"],
+      "He's looking for his own Grey Havens. <span class='rec'>(PAROLE) is highly recommended.</span>"],
     conditions:"A warm lap worthy of the Shire. Long naps. Daily cuddles. A peaceful golden-years home." },
   ler: { num:"51", name:"Leroy", aka:"", rank:"The Professional · Works Alone",
     breed:"Terrier / American Pit Bull mix", sex:"Male", age:"4½ years", weight:"", status:"General Population — Solo Cell Assignment",
@@ -383,7 +383,7 @@ const DOGS = {
     notes:[
       "Inmate #51 officially checked into the Last Chance Ranch Correctional Facility from Orangeburg, SC, and immediately established himself as a professional. Leroy already knows all of his basic commands. He is smart, attentive, and does his best work alongside one trusted human — the kind of partner who's already thought three moves ahead and doesn't need a crew.",
       "Now, every inmate has a few conditions to their parole. Leroy's is simple: he prefers to be the only inmate in the cell block. He is not dog-friendly or cat-friendly — but he is incredibly loyal and devoted to his human. Once you earn his trust, you've got a best friend for life. That's not a limitation. That's a commitment.",
-      "<span class='parole'>(PAROLE) recommended</span> to a one-dog household ready for a partner, not a pet."],
+      "<span class='rec'>(PAROLE) recommended</span> to a one-dog household ready for a partner, not a pet."],
     conditions:"Only pet in the home. A person ready to earn his trust and keep it." },
   san: { num:"42", name:"Sanders", aka:"", rank:"E Block Rookie · Reformed Side-Eye Specialist",
     breed:"Mixed breed", sex:"Male", age:"", weight:"", status:"E Block — Rehabilitation in Progress",
@@ -391,7 +391,7 @@ const DOGS = {
     notes:[
       "Inmate #42 was picked up roaming the streets of North Augusta with a lengthy rap sheet: resisting leashes, avoiding human interaction, suspicious side-eye activity, and possession of zero survival skills indoors. Sanders came in feral and unsure of this whole “being loved” program.",
       "After transfer to E Block, he began serving his sentence of mandatory couch time, supervised Netflix rehabilitation, homemade prison meals, and emotional support from fellow inmates. Progress report: the side-eye is now mostly ironic. He is learning that hands are for petting, couches are for sharing, and people can be trusted — one at a time, on his schedule.",
-      "The right person for Sanders is patient, quiet, and unbothered by a slow burn. He'll get there. <span class='parole'>(PAROLE) recommended</span> to a home that lets him take his time."],
+      "The right person for Sanders is patient, quiet, and unbothered by a slow burn. He'll get there. <span class='rec'>(PAROLE) recommended</span> to a home that lets him take his time."],
     conditions:"A patient, calm home. Time to warm up. Couch access." },
   liz: { num:"8", name:"Lizzy", aka:"Lizzie", rank:"H-Block Veteran · The Family Business", hidden:true,
     pair:{ num:"9", name:"Thumper" },
@@ -400,7 +400,7 @@ const DOGS = {
     notes:[
       "The Warden reports that H-Block remains under the firm control of its resident sibling duo, Inmate #8 Lizzy and Inmate #9 Thumper. These two have perfected the art of sibling life: one minute inseparable, the next arguing over who gets the best bed, five minutes later back together like nothing happened. Deputies have determined that all disagreements are immediately forgotten if treats are involved.",
       "They may bicker like siblings, but Lizzy and Thumper are a bonded pair and must be adopted together. They've spent their lives side by side, and separating them isn't an option. Their bond is unbreakable, and they deserve a home where they can continue their sentence together — keeping morale high and the snack budget completely out of control.",
-      "Case status: guilty of stealing hearts. <span class='parole'>(PAROLE) recommended — together.</span>"],
+      "Case status: guilty of stealing hearts. <span class='rec'>(PAROLE) recommended — together.</span>"],
     conditions:"Adopted together with Thumper (#9). Two beds. A generous snack budget." },
   pri: { num:"", name:"Princess", aka:"Trophy", rank:"The Trophy · Every Heist Needs a Prize",
     breed:"", sex:"Female", age:"", weight:"", status:"General Population — File Pending",
@@ -408,7 +408,7 @@ const DOGS = {
     notes:[
       "Inmate file pending. What the Warden's office will confirm: her name is Princess, her alias is Trophy, and both are accurate. She is not the getaway driver and she is not the lookout. She is what's in the vault — the reason the whole crew showed up.",
       "Full Behavior Report and Warden's Notes are on their way. In the meantime, the charge stands: grand larceny of hearts, first degree.",
-      "<span class='parole'>(PAROLE) pending review.</span>"],
+      "<span class='rec'>(PAROLE) pending review.</span>"],
     conditions:"To be determined by the Warden. Applications welcome now." }
 };
 
