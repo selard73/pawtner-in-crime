@@ -403,14 +403,14 @@ const DOGS = {
       "They may bicker like siblings, but Lizzy and Thumper are <strong>a bonded pair and must be adopted together.</strong> They've spent their lives side by side, and separating them isn't an option. Their bond is unbreakable, and they deserve a home where they can continue their sentence together — keeping morale high and the snack budget completely out of control.",
       "Case status: guilty of stealing hearts. <span class='rec'>(PAROLE) recommended — together.</span>"],
     conditions:"Adopted together with Thumper (#9). Two beds. A generous snack budget." },
-  pri: { num:"", name:"Princess", aka:"Trophy", rank:"The Trophy · Every Heist Needs a Prize",
-    breed:"", sex:"Female", age:"", weight:"", status:"General Population — File Pending",
-    report:["Full file pending from the Warden","Ask about kids, dogs & cats","Reported: royalty"],
+  pri: { num:"16", name:"Princess", aka:"Trophy", rank:"Her Majesty · Sovereign of Snacks",
+    breed:"German Shepherd", sex:"Spayed female", age:"8+ years (senior)", weight:"60 lbs", status:"Royal Wing — Solo Cell by Decree",
+    report:["Loves snacks (all of them)","Knows basic commands","Walks great on a leash","Only animal — no other pets","No small children","Senior — calm & regal"],
     notes:[
-      "Inmate file pending. What the Warden's office will confirm: her name is <strong>Princess</strong>, her alias is <strong>Trophy</strong>, and both are accurate. She is not the getaway driver and she is not the lookout. <strong>She is what's in the vault</strong> — the reason the whole crew showed up.",
-      "Full Behavior Report and Warden's Notes are on their way. In the meantime, the charge stands: grand larceny of hearts, first degree.",
-      "<span class='rec'>(PAROLE) pending review.</span>"],
-    conditions:"To be determined by the Warden. Applications welcome now." }
+      "Inmate #16 goes by Princess. Her alias is Trophy. <strong>Both are accurate.</strong> She is not the getaway driver and she is not the lookout — <strong>she is what's in the vault</strong>, the reason the whole crew showed up. Eight-plus years of experience being adored, and she has no intention of sharing the throne.",
+      "The Warden's file is clear on her terms: Princess needs to be the <strong>ONLY animal</strong> in the home, and <strong>no small children</strong>. Not out of malice — out of policy. She wants her own kingdom. In exchange she offers a subject who <strong>knows her basic commands, walks beautifully on a leash</strong>, and will accept snacks as tribute at any hour.",
+      "She's looking for <strong>a quiet, snack-filled home where she can be your one and only.</strong> <span class='rec'>(PAROLE) is recommended</span> for an adopter ready to serve a queen."],
+    conditions:"Only animal in the home. No small children. A quiet kingdom and a well-stocked snack drawer." }
 };
 
 /* charges — the "what you're in for" reveal. Each answer adds one tally; the top charge wins. */
@@ -440,7 +440,7 @@ const QUESTIONS = [
   { q: "The alarm goes off mid-heist. You:", a: [
     ["Skydive out the window. It worked last time.", "oat", "blu", "escape"],
     ["Freeze. Side-eye everyone. Quietly reassess whether I trust this crew.", "san", "ler", "sideeye"],
-    ["Wag at the guards until they forget why they came.", "pri", "isa", "wag"],
+    ["Wag at the guards until they forget why they came.", "isa", "pri", "wag"],
     ["Alarm? I was napping. Wake me when it's over.", "liz", "fro", "nap"] ] },
   { q: "Your cell gets tossed. What contraband do they find?", a: [
     ["Forty-seven tennis balls. Allegedly.", "blu", "isa", "balls"],
@@ -458,7 +458,7 @@ const QUESTIONS = [
     ["Training with my one trusted human. Eyes on them. Focus.", "ler", "san", "loyal"],
     ["Greeting every single guard like it's a family reunion.", "isa", "oat", "greet"] ] },
   { q: "The Warden offers a plea deal. What's your price?", a: [
-    ["Unlimited treats. I'll sign anything.", "liz", "isa", "sandwich"],
+    ["Unlimited treats. I'll sign anything.", "pri", "liz", "sandwich"],
     ["A soft couch, a warm blanket, and a human who understands naps.", "fro", "san", "cuddle"],
     ["Full access to the yard. And the other yard. And the road.", "oat", "blu", "escape"],
     ["A throne, obviously. And someone to fetch things.", "pri", "ler", "hearts"] ] },
