@@ -212,6 +212,7 @@ h1:focus,h2:focus{outline:none}
 .fields dd.name{font-family:var(--disp); font-size:1.7rem; color:var(--red); letter-spacing:.06em; border-bottom:2px solid var(--ink)}
 .fields dd.name small{font-family:var(--type); font-size:.85rem; color:var(--ink-soft); text-transform:none; letter-spacing:0}
 .fields dd.pending{color:var(--muted); font-family:var(--type); text-transform:none; font-weight:400; font-size:.85rem}
+.fields dd.joke{font-family:var(--type); text-transform:none; font-weight:400; font-size:.88rem; color:var(--ink-soft); font-style:italic}
 
 .sec{margin-top:16px}
 .sechead{
@@ -683,7 +684,7 @@ function showResult(fixedKey){
           ${field("Breed", d.breed, "tw")}
           ${field("Status", d.sex, "tw")}
           ${field("Age", d.age, "tw")}
-          ${field("Weight", d.weight, "tw")}
+          ${field("Weight", d.weight, /\d/.test(d.weight || "") ? "tw" : "tw joke")}
           ${field("Custody", d.status, "tw")}
         </dl>
       </div>
