@@ -303,7 +303,7 @@ footer a{color:#F4E4B0; font-weight:700}
 @keyframes point{0%,100%{transform:translate(0,-50%)}50%{transform:translate(-8px,-50%)}}
 .cell.later{transform:scale(.6) rotate(-6deg); transition:opacity .35s, transform .35s cubic-bezier(.2,1.6,.4,1)}
 .cell.later.on{transform:none}
-.answer.later{transform:translateX(-14px); transition:opacity .3s, transform .3s cubic-bezier(.2,1.4,.4,1)}
+.answer.later{transform:translateY(-18px) scale(1.03); transition:opacity .18s, transform .32s cubic-bezier(.2,1.6,.4,1)}
 .answer.later.on{transform:none}
 
 /* toast */
@@ -566,7 +566,7 @@ async function runQuestionTypewriter(nAnswers){
   await sleep(150); if (cancelled()) return;
   await typeInto(q, run, 22); if (cancelled()) return;
   ding(); await sleep(200);
-  for (let k = 0; k < nAnswers; k++) { showStep("a" + k); click(); await sleep(140); if (cancelled()) return; }
+  for (let k = 0; k < nAnswers; k++) { showStep("a" + k); stampSound(); await sleep(190); if (cancelled()) return; }
   showStep("back");
   stage.removeEventListener("click", skip);
 }
