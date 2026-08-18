@@ -36,6 +36,8 @@ key: { num, name, aka, rank, breed, sex, age, weight, status,
 - `foster` — foster application (JotForm)
 - `donate` — Cash App → "Post Bail"
 - `page` — Last Chance Ranch Facebook page
+- `petfinder` — their Petfinder org page (Aiken, SC)
+- per-dog `link` — optional Petfinder listing (adds a "file & video on Petfinder" button on that card)
 
 Contact shown on the result: (803) 479-8408 · lastchanceranchofsc@gmail.com
 

@@ -336,7 +336,8 @@ const LINKS = {
   apply: "https://form.jotform.com/261266940400047",    // "Apply for Parole" — adoption application (JotForm)
   page:  "https://www.facebook.com/profile.php?id=61582497165034",   // Last Chance Ranch on Facebook
   foster: "https://form.jotform.com/261407369955064",   // Foster application (JotForm)
-  donate: "https://cash.app/$LastChanceRanchSC"          // "Post Bail" — Cash App
+  donate: "https://cash.app/$LastChanceRanchSC",         // "Post Bail" — Cash App
+  petfinder: "https://www.petfinder.com/member/us/sc/aiken/last-chance-ranch-of-south-carolina-sc10004/"
 };
 document.getElementById("footlink").href = LINKS.page;
 
@@ -405,6 +406,7 @@ const DOGS = {
     conditions:"Adopted together with Thumper (#9). Two beds. A generous snack budget." },
   pri: { num:"16", name:"Princess", aka:"Trophy", rank:"Her Majesty · Sovereign of Snacks",
     breed:"German Shepherd", sex:"Spayed female", age:"8+ years (senior)", weight:"60 lbs", status:"Royal Wing — Solo Cell by Decree",
+    link:"https://www.petfinder.com/dog/princess-aka-trophy-e36836dc-6534-4910-a3e9-5a9cd5e692eb/sc/aiken/last-chance-ranch-of-south-carolina-sc10004/details/",
     report:["Loves snacks (all of them)","Knows basic commands","Walks great on a leash","Only animal — no other pets","No small children","Senior — calm & regal"],
     notes:[
       "Inmate #16 goes by Princess. Her alias is Trophy. <strong>Both are accurate.</strong> She is not the getaway driver and she is not the lookout — <strong>she is what's in the vault</strong>, the reason the whole crew showed up. Eight-plus years of experience being adored, and she has no intention of sharing the throne.",
@@ -701,6 +703,7 @@ function showResult(fixedKey){
       <div class="ctas later" data-step="7">
         <p class="lock">🔒 Help <b>${displayName}</b> break free from the system and start a new life</p>
         <a class="btn primary" href="${LINKS.apply}" target="_blank" rel="noopener">Apply for Parole Today</a>
+        ${d.link ? `<a class="btn secondary" href="${d.link}" target="_blank" rel="noopener">${d.pair ? "Their" : (d.sex && d.sex.toLowerCase().includes("female") ? "Her" : "His")} file & video on Petfinder 🎬</a>` : ""}
         <div class="btnrow">
           <a class="btn secondary" href="${LINKS.donate}" target="_blank" rel="noopener">Post Bail 💵</a>
           <a class="btn secondary" href="${LINKS.foster}" target="_blank" rel="noopener">Foster (Halfway House)</a>
@@ -719,8 +722,8 @@ function showResult(fixedKey){
       </div>
       <div class="visit later" data-step="8">
         <p><strong>Last Chance Ranch</strong> · Department of Pawctions<br>
-        A small no-kill rescue in South Carolina. Every inmate leaves alive.<br>
-        <a href="tel:+18034798408">(803) 479-8408</a> · <a href="mailto:lastchanceranchofsc@gmail.com">lastchanceranchofsc@gmail.com</a> · <a href="${LINKS.page}" target="_blank" rel="noopener">Facebook</a></p>
+        A small no-kill rescue in Aiken, South Carolina. Every inmate leaves alive.<br>
+        <a href="tel:+18034798408">(803) 479-8408</a> · <a href="mailto:lastchanceranchofsc@gmail.com">lastchanceranchofsc@gmail.com</a> · <a href="${LINKS.page}" target="_blank" rel="noopener">Facebook</a> · <a href="${LINKS.petfinder}" target="_blank" rel="noopener">Petfinder</a></p>
       </div>
     </div>
   `, "result");
