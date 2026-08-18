@@ -266,10 +266,21 @@ footer a{color:#F4E4B0; font-weight:700}
 .tw-hide{visibility:hidden}
 .tw-cursor::after{content:"▌"; color:var(--red); animation:blink .8s steps(1) infinite; margin-left:1px}
 .later{opacity:0; transition:opacity .5s}
+.later:not(.on){pointer-events:none}
 .later.on{opacity:1}
 .mute{position:fixed; top:10px; right:10px; z-index:60; background:var(--ink); color:var(--paper); border:2px solid var(--paper); font-size:1rem; width:38px; height:38px; cursor:pointer; box-shadow:2px 2px 0 #000}
 .mute:hover{background:var(--red)}
 .skiphint{font-family:var(--cond); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-align:center; margin:-6px 0 8px}
+
+/* Book Me pulse */
+.btn.pulse{animation:pulse 1.6s ease-in-out infinite; position:relative}
+@keyframes pulse{0%,100%{transform:translateY(0) scale(1); box-shadow:0 5px 0 var(--red-deep), 0 0 0 0 rgba(184,35,31,.55)}50%{transform:translateY(-2px) scale(1.04); box-shadow:0 7px 0 var(--red-deep), 0 0 0 14px rgba(184,35,31,0)}}
+.btn.pulse::after{content:"👉"; position:absolute; left:-44px; top:50%; transform:translateY(-50%); font-size:1.4rem; animation:point .9s ease-in-out infinite}
+@keyframes point{0%,100%{transform:translate(0,-50%)}50%{transform:translate(-8px,-50%)}}
+.cell.later{transform:scale(.6) rotate(-6deg); transition:opacity .35s, transform .35s cubic-bezier(.2,1.6,.4,1)}
+.cell.later.on{transform:none}
+.answer.later{transform:translateX(-14px); transition:opacity .3s, transform .3s cubic-bezier(.2,1.4,.4,1)}
+.answer.later.on{transform:none}
 
 /* toast */
 .toast{position:fixed; left:50%; bottom:26px; transform:translate(-50%,16px); background:var(--ink); color:var(--paper); font-family:var(--cond); font-size:.9rem; font-weight:700; letter-spacing:.06em; padding:12px 22px; border:2px solid var(--paper); opacity:0; transition:opacity .35s, transform .35s; z-index:50; max-width:88vw; text-align:center}
@@ -456,17 +467,38 @@ function header(){
 /* ---------- intro ---------- */
 function showIntro(){
   answers = []; current = 0;
-  const cells = ACTIVE().map(k => `<div class="cell"><i>?</i><span>Inmate ${DOGS[k].num ? "#" + DOGS[k].num : "#??"}</span></div>`).join("");
+  const cells = ACTIVE().map((k, i) => `<div class="cell later" data-step="${i}"><i>?</i><span>Inmate ${DOGS[k].num ? "#" + DOGS[k].num : "#??"}</span></div>`).join("");
+  const nCells = ACTIVE().length;
   setScreen(`
     ${header()}
-    <div class="filehead">Inmate File</div>
-    <p class="hook"><strong>Bonnie had Clyde. Thelma had Louise. Butch had Sundance.</strong></p>
-    <h1 class="title">Who's your <em>pawtner</em> in crime?</h1>
-    <p class="lede">${QUESTIONS.length === 8 ? "Eight" : QUESTIONS.length} questions. ${["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"][ACTIVE().length] || ACTIVE().length} very real inmates doing time at Last Chance Ranch for circumstances beyond their control. Get booked, find out what <em>you're</em> in for, and meet the one who'd take the fall for you.</p>
+    <div class="filehead later" data-step="head">Inmate File</div>
+    <p class="hook tw"><strong>Bonnie had Clyde. Thelma had Louise. Butch had Sundance.</strong></p>
+    <h1 class="title tw">Who's your <em>pawtner</em> in crime?</h1>
+    <p class="lede tw">${QUESTIONS.length === 8 ? "Eight" : QUESTIONS.length} questions. ${["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"][nCells] || nCells} very real inmates doing time at Last Chance Ranch for circumstances beyond their control. Get booked, find out what <em>you're</em> in for, and meet the one who'd take the fall for you.</p>
     <div class="cells" aria-hidden="true">${cells}</div>
-    <button class="btn primary" onclick="showQuestion(0)">Book me 🚨</button>
-    <p class="fineprint">Takes about a minute. Zero science. One hundred percent real dogs, all eligible for parole.</p>
+    <button class="btn primary later" data-step="btn" onclick="showQuestion(0)">Book me 🚨</button>
+    <p class="fineprint later" data-step="btn">Takes about a minute. Zero science. One hundred percent real dogs, all eligible for parole.</p>
   `, "intro");
+  runIntroTypewriter(nCells);
+}
+async function runIntroTypewriter(nCells){
+  const run = ++twRun;
+  const targets = Array.from(document.querySelectorAll(".tw"));
+  const btn = document.querySelector(".btn.primary");
+  if (REDUCE){ finishAll(); btn.classList.add("pulse"); return; }
+  targets.forEach(e => e.classList.add("tw-hide"));
+  const originals = new Map(targets.map(e => [e, e.innerHTML]));
+  const cancelled = () => { if (twRun !== run) { originals.forEach((h, e) => { e.innerHTML = h; e.classList.remove("tw-hide","tw-cursor"); }); return true; } return false; };
+  const skip = () => { if (twRun === run) { twRun++; originals.forEach((h, e) => { e.innerHTML = h; }); finishAll(); btn.classList.add("pulse"); } };
+  stage.addEventListener("click", skip, { once: true });
+  await sleep(300); if (cancelled()) return;
+  showStep("head"); stampSound();
+  await sleep(500);
+  for (const el of targets) { await typeInto(el, run, el.classList.contains("title") ? 40 : el.classList.contains("hook") ? 34 : 14); if (cancelled()) return; ding(); await sleep(250); }
+  for (let i = 0; i < nCells; i++) { showStep(String(i)); click(); await sleep(110); if (cancelled()) return; }
+  await sleep(200);
+  showStep("btn"); stampSound(); btn.classList.add("pulse");
+  stage.removeEventListener("click", skip);
 }
 
 /* ---------- questions ---------- */
@@ -474,15 +506,32 @@ function showQuestion(i){
   current = i;
   const qq = QUESTIONS[i];
   const paws = QUESTIONS.map((_, n) => `<span class="paw ${n < i ? "done" : ""} ${n === i ? "now" : ""}">🐾</span>`).join("");
-  const opts = qq.a.map((a, ai) => `<button class="answer ${answers[i] === ai ? "picked" : ""}" onclick="pick(${ai})">${a[0]}</button>`).join("");
+  const opts = qq.a.map((a, ai) => `<button class="answer later ${answers[i] === ai ? "picked" : ""}" data-step="a${ai}" onclick="pick(${ai})">${a[0]}</button>`).join("");
   setScreen(`
     ${header()}
     <p class="qnum">Booking form · Question ${i + 1} of ${QUESTIONS.length}</p>
     <div class="paws" role="img" aria-label="Question ${i + 1} of ${QUESTIONS.length}">${paws}</div>
-    <h2 class="question">${qq.q}</h2>
+    <h2 class="question tw">${qq.q}</h2>
     <div class="answers">${opts}</div>
-    ${i > 0 ? `<button class="btn quiet" onclick="showQuestion(${i - 1})">← Back</button>` : ""}
+    ${i > 0 ? `<button class="btn quiet later" data-step="back" onclick="showQuestion(${i - 1})">← Back</button>` : ""}
   `, "quiz");
+  runQuestionTypewriter(qq.a.length);
+}
+async function runQuestionTypewriter(nAnswers){
+  const run = ++twRun;
+  const q = document.querySelector(".question.tw");
+  if (REDUCE){ finishAll(); return; }
+  q.classList.add("tw-hide");
+  const original = q.innerHTML;
+  const cancelled = () => { if (twRun !== run) { q.innerHTML = original; q.classList.remove("tw-hide","tw-cursor"); return true; } return false; };
+  const skip = () => { if (twRun === run) { twRun++; q.innerHTML = original; finishAll(); } };
+  stage.addEventListener("click", skip, { once: true });
+  await sleep(150); if (cancelled()) return;
+  await typeInto(q, run, 22); if (cancelled()) return;
+  ding(); await sleep(200);
+  for (let k = 0; k < nAnswers; k++) { showStep("a" + k); click(); await sleep(140); if (cancelled()) return; }
+  showStep("back");
+  stage.removeEventListener("click", skip);
 }
 function pick(ai){
   answers[current] = ai;
@@ -639,18 +688,24 @@ function ensureAudio(){
   return actx;
 }
 /* Optional real samples: drop files in sounds/ (key.mp3|wav, ding.mp3|wav, stamp.mp3|wav). Falls back to synth if missing. */
-const SAMPLES = { key: null, ding: null, stamp: null };
+/* key1..key5 rotate randomly (real strikes never sound identical); key.* alone also works. */
+const SAMPLES = { key: [], ding: null, stamp: null };
 (function loadSamples(){
   const c = (() => { try { return new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return null; } })();
   if (!c) return; actx = c;
-  ["key","ding","stamp"].forEach(name => {
-    ["mp3","wav","ogg"].reduce((p, ext) => p.then(ok => ok || fetch(`sounds/${name}.${ext}`).then(r => r.ok ? r.arrayBuffer() : Promise.reject())
-      .then(ab => c.decodeAudioData(ab)).then(buf => { SAMPLES[name] = buf; return true; }).catch(() => false)), Promise.resolve(false));
-  });
+  const load = name => ["wav","mp3","ogg"].reduce((p, ext) => p.then(ok => ok || fetch(`sounds/${name}.${ext}`)
+    .then(r => r.ok ? r.arrayBuffer() : Promise.reject()).then(ab => c.decodeAudioData(ab)).catch(() => null)
+    .then(buf => buf ? (buf.__name = name, buf) : false)), Promise.resolve(false));
+  ["key","key1","key2","key3","key4","key5"].forEach(n => load(n).then(b => { if (b) SAMPLES.key.push(b); }));
+  load("ding").then(b => { if (b) SAMPLES.ding = b; });
+  load("stamp").then(b => { if (b) SAMPLES.stamp = b; });
 })();
 function playSample(name, gainVal, rateJitter){
-  const c = ensureAudio(); if (!c || !SAMPLES[name]) return false;
-  const src = c.createBufferSource(); src.buffer = SAMPLES[name];
+  const c = ensureAudio(); if (!c) return false;
+  let buf = SAMPLES[name];
+  if (Array.isArray(buf)) buf = buf.length ? buf[Math.floor(Math.random() * buf.length)] : null;
+  if (!buf) return false;
+  const src = c.createBufferSource(); src.buffer = buf;
   src.playbackRate.value = 1 + (Math.random() * 2 - 1) * (rateJitter || 0);
   const g = c.createGain(); g.gain.value = gainVal || 1;
   src.connect(g); g.connect(c.destination); src.start();
@@ -659,14 +714,28 @@ function playSample(name, gainVal, rateJitter){
 function click(){                  // one typewriter key strike
   if (playSample("key", 0.9, 0.08)) return;
   const c = ensureAudio(); if (!c) return;
-  const len = Math.floor(c.sampleRate * 0.045);
+  // manual-typewriter strike: a low "thunk" (body) + a short dry "click" (typebar) layered
+  const t = c.currentTime;
+  const len = Math.floor(c.sampleRate * 0.06);
   const buf = c.createBuffer(1, len, c.sampleRate), data = buf.getChannelData(0);
-  for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.5);
+  for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2);
   const src = c.createBufferSource(); src.buffer = buf;
-  const f = c.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 520 + Math.random() * 260; f.Q.value = 0.9;
-  const lo = c.createBiquadFilter(); lo.type = "lowpass"; lo.frequency.value = 1400;
-  const g = c.createGain(); g.gain.value = 0.42 + Math.random() * 0.15;
-  src.connect(f); f.connect(lo); lo.connect(g); g.connect(c.destination); src.start();
+  const lo = c.createBiquadFilter(); lo.type = "lowpass"; lo.frequency.value = 900 + Math.random() * 200; lo.Q.value = 0.7;
+  const g = c.createGain(); g.gain.value = 0.7 + Math.random() * 0.2;
+  src.connect(lo); lo.connect(g); g.connect(c.destination); src.start(t);
+  // body thump
+  const o = c.createOscillator(), og = c.createGain();
+  o.type = "triangle"; o.frequency.setValueAtTime(190 + Math.random() * 40, t); o.frequency.exponentialRampToValueAtTime(70, t + 0.05);
+  og.gain.setValueAtTime(0.5, t); og.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+  o.connect(og); og.connect(c.destination); o.start(t); o.stop(t + 0.08);
+  // typebar tick
+  const clen = Math.floor(c.sampleRate * 0.012);
+  const cb = c.createBuffer(1, clen, c.sampleRate), cd = cb.getChannelData(0);
+  for (let i = 0; i < clen; i++) cd[i] = (Math.random() * 2 - 1) * (1 - i / clen);
+  const cs = c.createBufferSource(); cs.buffer = cb;
+  const hp = c.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 2500;
+  const cg = c.createGain(); cg.gain.value = 0.12;
+  cs.connect(hp); hp.connect(cg); cg.connect(c.destination); cs.start(t);
 }
 function ding(){                   // carriage-return bell
   if (playSample("ding", 0.8, 0)) return;
