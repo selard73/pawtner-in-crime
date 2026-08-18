@@ -223,6 +223,7 @@ h1:focus,h2:focus{outline:none}
 .report li::before{content:"🐾"; position:absolute; left:0; top:0; font-size:.75rem}
 .notes{font-family:var(--type); font-size:.93rem; line-height:1.6; color:var(--ink)}
 .notes p{margin-bottom:9px}
+.notes strong{font-weight:700; color:var(--ink); background:linear-gradient(transparent 55%, rgba(184,35,31,.16) 55%, rgba(184,35,31,.16) 92%, transparent 92%); padding:0 2px}
 .notes .rec{color:var(--red); font-weight:700; white-space:nowrap}
 .reportwrap{display:flex; gap:12px; align-items:flex-start; justify-content:space-between}
 .reportwrap .stamp.round{flex:0 0 auto; margin-top:6px}
@@ -349,64 +350,64 @@ const DOGS = {
     breed:"Lab mix", sex:"Male", age:"4 years", weight:"", status:"Half Way House — Home-to-Home Parole",
     report:["Good with cats","Good with dogs","No food aggression","Loves people & attention","House training in progress","Mild leash pulling (settles)"],
     notes:[
-      "Inmate #39 has a past. The Warden won't confirm the details, but the file mentions one legendary bank job, a getaway that involved a parachute, and a landing nobody at the Ranch has stopped talking about. Oatmeal, for his part, has retired from the heist business and taken up a quieter line of work: greeting people at doors like every one of them is the score of a lifetime.",
-      "In custody he has been a model inmate — gets along with dogs, gets along with cats, guards nothing but the doorway. He is still perfecting his house training and pulls a little on leash for the first block, then settles in like the pro he is. He doesn't need perfection. He needs a patient human and a soft place to land. He's had enough hard landings.",
-      "Booked 05/28/24. He has served his time. <span class='rec'>(PAROLE) is strongly recommended.</span>"],
+      "Inmate #39 has a past. The Warden won't confirm the details, but the file mentions <strong>one legendary bank job</strong>, a getaway that involved <strong>a parachute</strong>, and a landing nobody at the Ranch has stopped talking about. Oatmeal, for his part, has retired from the heist business and taken up a quieter line of work: <strong>greeting people at doors</strong> like every one of them is the score of a lifetime.",
+      "In custody he has been a model inmate — <strong>gets along with dogs, gets along with cats</strong>, guards nothing but the doorway. He is still perfecting his house training and pulls a little on leash for the first block, then settles in like the pro he is. He doesn't need perfection. He needs <strong>a patient human and a soft place to land.</strong> He's had enough hard landings.",
+      "<strong>Booked 05/28/24.</strong> He has served his time. <span class='rec'>(PAROLE) is strongly recommended.</span>"],
     conditions:"Patient home willing to finish house training. Home-to-home adoption — keeps this inmate out of the shelter system." },
   blu: { num:"34", name:"Blue", aka:"Bleu", rank:"The Blue-Eyed Bandit · Yard Boss",
     breed:"Catahoula Leopard Dog / mixed breed", sex:"Neutered male", age:"Approx. 2+ years", weight:"52.5 lbs", status:"General Population — Maximum Security Snuggles Unit",
     report:["Very social","People friendly","Dog friendly","Loves to play and run","Kids: unknown","Cats: unknown"],
     notes:[
-      "Inmate #34 is wanted in at least three counties for the same offense: making eye contact. Those eyes are ice-blue, they are legally a weapon, and Blue deploys them on every guard, volunteer, and visitor who comes down the row. Nobody has finished a shift without giving him a belly rub. Nobody.",
-      "Blue is serving time for circumstances beyond his control. Despite his past, he has proven to be a model inmate — very social, friendly with people and dogs, and a full-tilt believer that every yard time is the best day of his life. He runs like he's being paid per lap.",
-      "He's ready for early release into a committed home with structure, exercise, and a couch he's technically not allowed on. <span class='rec'>(PAROLE) is recommended.</span>"],
+      "Inmate #34 is wanted in at least three counties for the same offense: <strong>making eye contact.</strong> Those eyes are <strong>ice-blue</strong>, they are legally a weapon, and Blue deploys them on every guard, volunteer, and visitor who comes down the row. Nobody has finished a shift without giving him a belly rub. Nobody.",
+      "Blue is serving time for circumstances beyond his control. Despite his past, he has proven to be a model inmate — <strong>very social, friendly with people and dogs</strong>, and a full-tilt believer that every yard time is the best day of his life. He runs like he's being paid per lap.",
+      "He's ready for early release into a committed home with <strong>structure, exercise</strong>, and a couch he's technically not allowed on. <span class='rec'>(PAROLE) is recommended.</span>"],
     conditions:"Approved adopter willing to provide structure, exercise, and a lifelong commitment." },
   isa: { num:"35", name:"Isaiah", aka:"", rank:"Snuggle Officer",
     breed:"Labrador Retriever", sex:"Neutered male", age:"1½ years", weight:"51 lbs", status:"General Population — Maximum Security Snuggles Unit",
     report:["Dog friendly","People friendly","Toy & food/treat motivated","Cat interested but not aggressive","Loves cuddles","Kids: unknown"],
     notes:[
-      "Inmate #35 is what the file calls a smooth operator. Isaiah has stolen the hearts of staff and inmates alike with a charming personality, an irresistible smile, and cuddle skills that should honestly require a permit. He is always on his best behavior when treats or toys are involved — and he has figured out that treats or toys are always involved if he looks at you like that.",
-      "He is friendly with people, friendly with dogs, and merely <em>interested</em> in cats, which around here counts as restraint. Assigned rank: Snuggle Officer. He takes the title seriously.",
+      "Inmate #35 is what the file calls a smooth operator. Isaiah has <strong>stolen the hearts of staff and inmates alike</strong> with a charming personality, an irresistible smile, and <strong>cuddle skills</strong> that should honestly require a permit. He is always on his best behavior when treats or toys are involved — and he has figured out that treats or toys are always involved if he looks at you like that.",
+      "He is <strong>friendly with people, friendly with dogs</strong>, and merely <em>interested</em> in cats, which around here counts as restraint. Assigned rank: <strong>Snuggle Officer.</strong> He takes the title seriously.",
       "Isaiah is ready for parole into a loving forever home. <span class='rec'>(PAROLE) is highly recommended.</span>"],
     conditions:"Approved adopter willing to provide structure, exercise, treats, and a lifelong commitment." },
   fro: { num:"52", name:"Frodo", aka:"", rank:"Ringbearer · Head of Napping",
     breed:"Staffordshire Bull Terrier", sex:"Male", age:"Senior", weight:"", status:"Minimum Security — Eligible for Immediate Parole",
     report:["Couch po-ta-to","Long naps a specialty","Daily cuddles (non-negotiable)","Calm & steady","Senior — quest complete","Dogs / kids / cats: ask the Warden"],
     notes:[
-      "Meet Frodo, the bravest little hobbit this side of the Shire. Unlike his famous namesake, this Frodo has already completed his long journey and is ready to retire somewhere far more comfortable than Mordor. There has been some debate around the prison as to whether he is a Hobbit or a po-ta-to. The evidence is overwhelming: he is round, soft, happiest lounging, and has perfected the ancient art of doing absolutely nothing for hours at a time.",
-      "While other inmates cause shenanigans, Frodo has dedicated himself to becoming the finest couch po-ta-to in the entire Shire. His parole requirements are simple: a warm lap, plenty of naps, daily cuddles, and someone who understands that every great hero deserves a peaceful ending to his story.",
+      "Meet Frodo, <strong>the bravest little hobbit this side of the Shire.</strong> Unlike his famous namesake, this Frodo has already completed his long journey and is ready to retire somewhere far more comfortable than Mordor. There has been some debate around the prison as to whether he is <strong>a Hobbit or a po-ta-to.</strong> The evidence is overwhelming: he is round, soft, happiest lounging, and has perfected the ancient art of doing absolutely nothing for hours at a time.",
+      "While other inmates cause shenanigans, Frodo has dedicated himself to becoming <strong>the finest couch po-ta-to in the entire Shire.</strong> His parole requirements are simple: <strong>a warm lap, plenty of naps, daily cuddles</strong>, and someone who understands that every great hero deserves a peaceful ending to his story.",
       "He's looking for his own Grey Havens. <span class='rec'>(PAROLE) is highly recommended.</span>"],
     conditions:"A warm lap worthy of the Shire. Long naps. Daily cuddles. A peaceful golden-years home." },
   ler: { num:"51", name:"Leroy", aka:"", rank:"The Professional · Works Alone",
     breed:"Terrier / American Pit Bull mix", sex:"Male", age:"4½ years", weight:"", status:"General Population — Solo Cell Assignment",
     report:["Knows all basic commands","Smart & attentive","Loves working with his person","Fiercely loyal","Only pet — not dog or cat friendly","Kids: ask the Warden"],
     notes:[
-      "Inmate #51 officially checked into the Last Chance Ranch Correctional Facility from Orangeburg, SC, and immediately established himself as a professional. Leroy already knows all of his basic commands. He is smart, attentive, and does his best work alongside one trusted human — the kind of partner who's already thought three moves ahead and doesn't need a crew.",
-      "Now, every inmate has a few conditions to their parole. Leroy's is simple: he prefers to be the only inmate in the cell block. He is not dog-friendly or cat-friendly — but he is incredibly loyal and devoted to his human. Once you earn his trust, you've got a best friend for life. That's not a limitation. That's a commitment.",
+      "Inmate #51 officially checked into the Last Chance Ranch Correctional Facility from Orangeburg, SC, and immediately established himself as <strong>a professional.</strong> Leroy <strong>already knows all of his basic commands.</strong> He is smart, attentive, and does his best work alongside one trusted human — the kind of partner who's already thought three moves ahead and doesn't need a crew.",
+      "Now, every inmate has a few conditions to their parole. Leroy's is simple: <strong>he prefers to be the only inmate in the cell block.</strong> He is not dog-friendly or cat-friendly — but he is incredibly loyal and devoted to his human. Once you earn his trust, <strong>you've got a best friend for life.</strong> That's not a limitation. That's a commitment.",
       "<span class='rec'>(PAROLE) recommended</span> to a one-dog household ready for a partner, not a pet."],
     conditions:"Only pet in the home. A person ready to earn his trust and keep it." },
   san: { num:"42", name:"Sanders", aka:"", rank:"E Block Rookie · Reformed Side-Eye Specialist",
     breed:"Mixed breed", sex:"Male", age:"", weight:"", status:"E Block — Rehabilitation in Progress",
     report:["Came in shy — warming up","Housed with other dogs (E Block)","Couch time: mandatory","Netflix rehabilitation: ongoing","Kids / cats: ask the Warden","Best for a patient home"],
     notes:[
-      "Inmate #42 was picked up roaming the streets of North Augusta with a lengthy rap sheet: resisting leashes, avoiding human interaction, suspicious side-eye activity, and possession of zero survival skills indoors. Sanders came in feral and unsure of this whole “being loved” program.",
-      "After transfer to E Block, he began serving his sentence of mandatory couch time, supervised Netflix rehabilitation, homemade prison meals, and emotional support from fellow inmates. Progress report: the side-eye is now mostly ironic. He is learning that hands are for petting, couches are for sharing, and people can be trusted — one at a time, on his schedule.",
-      "The right person for Sanders is patient, quiet, and unbothered by a slow burn. He'll get there. <span class='rec'>(PAROLE) recommended</span> to a home that lets him take his time."],
+      "Inmate #42 was picked up roaming the streets of North Augusta with a lengthy rap sheet: <strong>resisting leashes, avoiding human interaction, suspicious side-eye activity</strong>, and possession of zero survival skills indoors. Sanders came in feral and unsure of this whole “being loved” program.",
+      "After transfer to E Block, he began serving his sentence of <strong>mandatory couch time, supervised Netflix rehabilitation</strong>, homemade prison meals, and emotional support from fellow inmates. Progress report: <strong>the side-eye is now mostly ironic.</strong> He is learning that hands are for petting, couches are for sharing, and people can be trusted — one at a time, on his schedule.",
+      "The right person for Sanders is <strong>patient, quiet, and unbothered by a slow burn.</strong> He'll get there. <span class='rec'>(PAROLE) recommended</span> to a home that lets him take his time."],
     conditions:"A patient, calm home. Time to warm up. Couch access." },
   liz: { num:"8", name:"Lizzy", aka:"Lizzie", rank:"H-Block Veteran · The Family Business", hidden:true,
     pair:{ num:"9", name:"Thumper" },
     breed:"Lab mix", sex:"Female", age:"", weight:"", status:"H-Block — Bonded Pair (must be paroled together)",
     report:["Bonded with brother Thumper (#9)","Must be adopted together","Seasoned inmate — handles anything","Bickers over beds, forgets it for treats","Dog friendly (obviously)","Kids / cats: ask the Warden"],
     notes:[
-      "The Warden reports that H-Block remains under the firm control of its resident sibling duo, Inmate #8 Lizzy and Inmate #9 Thumper. These two have perfected the art of sibling life: one minute inseparable, the next arguing over who gets the best bed, five minutes later back together like nothing happened. Deputies have determined that all disagreements are immediately forgotten if treats are involved.",
-      "They may bicker like siblings, but Lizzy and Thumper are a bonded pair and must be adopted together. They've spent their lives side by side, and separating them isn't an option. Their bond is unbreakable, and they deserve a home where they can continue their sentence together — keeping morale high and the snack budget completely out of control.",
+      "The Warden reports that H-Block remains under the firm control of its resident sibling duo, <strong>Inmate #8 Lizzy and Inmate #9 Thumper.</strong> These two have perfected the art of sibling life: one minute inseparable, the next arguing over who gets the best bed, five minutes later back together like nothing happened. Deputies have determined that all disagreements are <strong>immediately forgotten if treats are involved.</strong>",
+      "They may bicker like siblings, but Lizzy and Thumper are <strong>a bonded pair and must be adopted together.</strong> They've spent their lives side by side, and separating them isn't an option. Their bond is unbreakable, and they deserve a home where they can continue their sentence together — keeping morale high and the snack budget completely out of control.",
       "Case status: guilty of stealing hearts. <span class='rec'>(PAROLE) recommended — together.</span>"],
     conditions:"Adopted together with Thumper (#9). Two beds. A generous snack budget." },
   pri: { num:"", name:"Princess", aka:"Trophy", rank:"The Trophy · Every Heist Needs a Prize",
     breed:"", sex:"Female", age:"", weight:"", status:"General Population — File Pending",
     report:["Full file pending from the Warden","Ask about kids, dogs & cats","Reported: royalty"],
     notes:[
-      "Inmate file pending. What the Warden's office will confirm: her name is Princess, her alias is Trophy, and both are accurate. She is not the getaway driver and she is not the lookout. She is what's in the vault — the reason the whole crew showed up.",
+      "Inmate file pending. What the Warden's office will confirm: her name is <strong>Princess</strong>, her alias is <strong>Trophy</strong>, and both are accurate. She is not the getaway driver and she is not the lookout. <strong>She is what's in the vault</strong> — the reason the whole crew showed up.",
       "Full Behavior Report and Warden's Notes are on their way. In the meantime, the charge stands: grand larceny of hearts, first degree.",
       "<span class='rec'>(PAROLE) pending review.</span>"],
     conditions:"To be determined by the Warden. Applications welcome now." }
