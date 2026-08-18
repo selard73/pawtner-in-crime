@@ -45,4 +45,4 @@ Push to GitHub → Render static site (or Netlify), same as fairy-dog-child. **A
 
 ## Sounds
 
-The typewriter click / bell / stamp are synthesized by default (no files). To use real samples, drop `sounds/key.mp3`, `sounds/ding.mp3`, `sounds/stamp.mp3` (`.wav`/`.ogg` also work) — the page picks them up automatically and adds slight pitch variation per keystroke. Mute toggle top-right; preference is remembered.
+The typewriter click / bell / stamp are synthesized by default (no files). To use real samples, drop `sounds/key.mp3`, `sounds/ding.mp3`, `sounds/stamp.wav` (light thud, answer cards), `sounds/slam.wav` (heavy stamp) (`.mp3`/`.ogg` also work) — the page picks them up automatically and adds slight pitch variation per keystroke. Mute toggle top-right; preference is remembered.

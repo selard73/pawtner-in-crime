@@ -522,16 +522,16 @@ async function runIntroSequence(nCells){
   await sleep(450); if (cancelled()) return;          // paper drops in
   on(".rule.draw");
   await sleep(350);
-  on(".filehead.slamin"); stampSound(); setTimeout(shake, 220);   // INMATE FILE slams
+  on(".filehead.slamin"); slamSound(); setTimeout(shake, 220);   // INMATE FILE slams
   await sleep(650);
   const lines = document.querySelectorAll(".hook .line");
   for (const l of lines) { l.classList.add("on"); click(); await sleep(380); if (cancelled()) return; }
   await sleep(150);
-  on(".title.slamin"); stampSound(); setTimeout(shake, 200);       // title stamps in red
+  on(".title.slamin"); slamSound(); setTimeout(shake, 200);       // title stamps in red
   await sleep(600);
   for (let i = 0; i < nCells; i++) { showStep(String(i)); click(); await sleep(70); if (cancelled()) return; }
   await sleep(250);
-  on(".btn.primary.land"); stampSound(); setTimeout(shake, 250);   // Book Me lands
+  on(".btn.primary.land"); slamSound(); setTimeout(shake, 250);   // Book Me lands
   await sleep(500);
   btn.classList.remove("land"); btn.classList.add("pulse"); showStep("fine");
   await typeInto(lede, run, 12); if (cancelled()) return;          // lede types while button pulses
@@ -726,7 +726,7 @@ function ensureAudio(){
 }
 /* Optional real samples: drop files in sounds/ (key.mp3|wav, ding.mp3|wav, stamp.mp3|wav). Falls back to synth if missing. */
 /* key1..key5 rotate randomly (real strikes never sound identical); key.* alone also works. */
-const SAMPLES = { key: [], ding: null, stamp: null };
+const SAMPLES = { key: [], ding: null, stamp: null, slam: null };
 (function loadSamples(){
   const c = (() => { try { return new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return null; } })();
   if (!c) return; actx = c;
@@ -736,6 +736,7 @@ const SAMPLES = { key: [], ding: null, stamp: null };
   ["key","key1","key2","key3","key4","key5"].forEach(n => load(n).then(b => { if (b) SAMPLES.key.push(b); }));
   load("ding").then(b => { if (b) SAMPLES.ding = b; });
   load("stamp").then(b => { if (b) SAMPLES.stamp = b; });
+  load("slam").then(b => { if (b) SAMPLES.slam = b; });
 })();
 function playSample(name, gainVal, rateJitter){
   const c = ensureAudio(); if (!c) return false;
@@ -782,8 +783,11 @@ function ding(){                   // carriage-return bell
   g.gain.setValueAtTime(0.14, c.currentTime); g.gain.exponentialRampToValueAtTime(0.0008, c.currentTime + 0.5);
   o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime + 0.5);
 }
-function stampSound(){             // rubber stamp thud
-  if (playSample("stamp", 1, 0.05)) return;
+function slamSound(){              // heavy stamp: INMATE FILE, title, WANTED, GOOD BOY, Book Me
+  if (playSample("slam", 1, 0.04)) return; stampSound();
+}
+function stampSound(){             // lighter thud: answer cards
+  if (playSample("stamp", 0.9, 0.06)) return;
   const c = ensureAudio(); if (!c) return;
   const len = Math.floor(c.sampleRate * 0.09);
   const buf = c.createBuffer(1, len, c.sampleRate), data = buf.getChannelData(0);
@@ -842,12 +846,12 @@ async function runTypewriter(){
   armSkip(skip);
 
   await sleep(350); if (restoreIfCancelled()) return;
-  showStep(0); stampSound();
+  showStep(0); slamSound();
   await sleep(300);
   // charge line + charge
   for (const el of targets.filter(e => e.closest(".charge"))) { await typeInto(el, run, 26); if (restoreIfCancelled()) return; }
   ding(); await sleep(400);
-  showStep(1); stampSound();               // WANTED slams
+  showStep(1); slamSound();               // WANTED slams
   await sleep(700);
   const title = targets.find(e => e.classList.contains("title"));
   if (title) { await typeInto(title, run, 34); if (restoreIfCancelled()) return; }
@@ -857,7 +861,7 @@ async function runTypewriter(){
   ding(); await sleep(300);
   showStep(3);
   for (const el of targets.filter(e => e.closest(".report"))) { await typeInto(el, run, 16); if (restoreIfCancelled()) return; await sleep(80); }
-  showStep(4); stampSound();                 // GOOD BOY stamp
+  showStep(4); slamSound();                 // GOOD BOY stamp
   await sleep(500);
   showStep(5);
   for (const el of targets.filter(e => e.closest(".notes"))) { await typeInto(el, run, 9); if (restoreIfCancelled()) return; ding(); await sleep(250); }
