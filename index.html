@@ -305,6 +305,9 @@ footer a{color:#F4E4B0; font-weight:700}
 .cell.later.on{transform:none}
 .answer.later{transform:translateY(-18px) scale(1.03); transition:opacity .18s, transform .32s cubic-bezier(.2,1.6,.4,1)}
 .answer.later.on{transform:none}
+.answer.chosen{transform:scale(1.05); background:#fff; border-color:var(--red); box-shadow:5px 5px 0 rgba(184,35,31,.45); z-index:2; transition:transform .35s cubic-bezier(.2,1.5,.4,1), box-shadow .35s, border-color .2s}
+.answer.chosen::before{content:"✔"; color:var(--red); font-size:15px; line-height:14px; text-align:center; font-weight:700}
+.answer.dim{opacity:.18; transform:scale(.97); pointer-events:none; transition:opacity .45s, transform .45s}
 
 /* toast */
 .toast{position:fixed; left:50%; bottom:26px; transform:translate(-50%,16px); background:var(--ink); color:var(--paper); font-family:var(--cond); font-size:.9rem; font-weight:700; letter-spacing:.06em; padding:12px 22px; border:2px solid var(--paper); opacity:0; transition:opacity .35s, transform .35s; z-index:50; max-width:88vw; text-align:center}
@@ -570,11 +573,20 @@ async function runQuestionTypewriter(nAnswers){
   showStep("back");
   stage.removeEventListener("click", skip);
 }
+let picking = false;
 function pick(ai){
+  if (picking) return;               // ignore double-clicks during the beat
+  picking = true;
   answers[current] = ai;
   ding();
-  if (current + 1 < QUESTIONS.length) showQuestion(current + 1);
-  else showInterstitial();
+  const btns = Array.from(document.querySelectorAll(".answer"));
+  btns.forEach((b, i) => { b.classList.remove("later"); b.classList.add(i === ai ? "chosen" : "dim"); });
+  const reduce = REDUCE ? 0 : 750;
+  setTimeout(() => {
+    picking = false;
+    if (current + 1 < QUESTIONS.length) showQuestion(current + 1);
+    else showInterstitial();
+  }, reduce);
 }
 
 /* ---------- scoring ---------- */
