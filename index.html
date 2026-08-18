@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who's Your Pawtner in Crime? 🚨🐾</title>
+<meta name="description" content="Bonnie had Clyde. Thelma had Louise. Butch had Sundance. Take the Last Chance Ranch booking quiz, find out what you're in for, and meet the inmate who'd take the fall for you.">
+<meta property="og:title" content="Who's Your Pawtner in Crime? 🚨🐾">
+<meta property="og:description" content="Bonnie had Clyde. Thelma had Louise. Butch had Sundance. Get booked, find out what you're in for, and meet your pawtner in crime at Last Chance Ranch.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&family=Permanent+Marker&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EAE0C8; --paper-deep:#D9CDAF; --paper-light:#F3ECDA;
+  --ink:#1B1A17; --ink-soft:#3B3830; --muted:#6B655A;
+  --red:#B8231F; --red-deep:#8E1814; --red-stamp:#C4302B;
+  --wood:#7A5230; --wood-light:#A6773F; --wood-dark:#4E3218;
+  --wall:#B9B7B0; --wall-line:#7E7C76;
+  --disp:'Anton','Oswald',Impact,sans-serif;
+  --cond:'Oswald','Anton',Impact,sans-serif;
+  --type:'Special Elite','Courier New',Courier,monospace;
+  --chalk:'Permanent Marker','Comic Sans MS',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--type); color:var(--ink); line-height:1.55;
+  min-height:100vh; padding:24px 12px 44px;
+  background-color:#2A2723;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 46px),
+    linear-gradient(180deg,#34302A 0%,#211E1A 100%);
+}
+main{max-width:660px;margin:0 auto;position:relative;z-index:1}
+
+/* the file folder / parchment stage */
+.stage{
+  position:relative; background:var(--paper); color:var(--ink);
+  border:2px solid #C9BD9E; padding:34px 26px 30px; text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.55), inset 0 0 90px rgba(90,70,30,.18);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.35), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(120,90,40,.16), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.025) 0 1px, transparent 1px 3px);
+}
+.stage::before{ /* worn edge */
+  content:""; position:absolute; inset:6px; border:1px dashed rgba(60,45,20,.28); pointer-events:none;
+}
+.stage.result{padding-top:26px}
+h1:focus,h2:focus{outline:none}
+
+/* header strip like the card: LAST CHANCE RANCH / DEPARTMENT OF PAWCTIONS */
+.dept{font-family:var(--cond); font-weight:700; letter-spacing:.22em; text-transform:uppercase; font-size:.78rem; color:var(--ink-soft)}
+.dept b{display:block; font-family:var(--disp); font-weight:400; letter-spacing:.12em; font-size:1.25rem; color:var(--ink)}
+.dept::before,.dept::after{content:"★"; color:var(--red); margin:0 .5em; font-size:.75em; vertical-align:middle}
+.dept::after{display:none}
+.dept b::before,.dept b::after{content:"—"; color:var(--ink-soft); margin:0 .4em; font-weight:400}
+.rule{height:3px; background:var(--ink); margin:12px auto 18px; width:70%; position:relative}
+.rule::after{content:""; position:absolute; left:0; right:0; top:5px; height:1px; background:var(--ink)}
+
+.filehead{
+  display:inline-block; font-family:var(--disp); font-size:clamp(2.2rem,8.5vw,3.4rem); letter-spacing:.06em;
+  color:var(--ink); line-height:1; margin:4px 0 8px;
+  background:linear-gradient(0deg, transparent 20%, var(--ink) 20% 80%, transparent 80%);
+  padding:0 .3em; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:currentColor;
+}
+.hook{font-family:var(--type); font-size:1.02rem; color:var(--ink-soft); max-width:44ch; margin:0 auto 6px; line-height:1.55}
+.hook strong{color:var(--ink)}
+.title{
+  font-family:var(--disp); font-weight:400; font-size:clamp(1.9rem,7vw,2.75rem);
+  line-height:1.05; margin:10px 0 14px; color:var(--red); letter-spacing:.03em; text-transform:uppercase;
+  text-shadow:2px 2px 0 rgba(0,0,0,.12);
+}
+.title em{font-style:normal; color:var(--ink)}
+.lede{font-size:.98rem; color:var(--ink-soft); max-width:48ch; margin:0 auto 20px}
+.fineprint{font-size:.78rem; color:var(--muted); margin-top:14px}
+
+/* stamps */
+.stamp{
+  display:inline-block; font-family:var(--disp); text-transform:uppercase; letter-spacing:.08em;
+  color:var(--red-stamp); border:4px double var(--red-stamp); padding:4px 12px; line-height:1;
+  transform:rotate(-6deg); opacity:.92; mix-blend-mode:multiply;
+  mask-image:radial-gradient(circle at 30% 40%, #000 60%, rgba(0,0,0,.6) 100%);
+}
+.stamp.sm{font-size:.9rem; padding:3px 9px; border-width:3px}
+.stamp.lg{font-size:1.9rem; padding:6px 16px}
+.stamp.tilt-r{transform:rotate(5deg)}
+.stamp.round{border-radius:50%; width:96px; height:96px; display:inline-flex; align-items:center; justify-content:center; text-align:center; font-size:.95rem; line-height:1.05; padding:0}
+
+/* intro: mystery cells */
+.cells{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px auto 22px; max-width:420px}
+.cell{
+  aspect-ratio:3/4; background:var(--wall); border:3px solid var(--ink); position:relative; overflow:hidden;
+  background-image:repeating-linear-gradient(0deg, transparent 0 14px, var(--wall-line) 14px 15px);
+  box-shadow:inset 0 0 18px rgba(0,0,0,.25);
+}
+.cell::before{ /* bars */
+  content:""; position:absolute; inset:0;
+  background:repeating-linear-gradient(90deg, rgba(20,20,20,.85) 0 5px, transparent 5px 19px);
+}
+.cell span{
+  position:absolute; left:8%; right:8%; bottom:10%; background:#EFE7D2; border:2px solid var(--ink);
+  font-family:var(--cond); font-weight:700; font-size:.62rem; letter-spacing:.06em; padding:3px 2px; line-height:1.15; color:var(--ink);
+}
+.cell i{position:absolute; top:12%; left:0; right:0; font-style:normal; font-family:var(--disp); font-size:2.2rem; color:var(--red); text-shadow:2px 2px 0 rgba(0,0,0,.25)}
+@media (max-width:420px){.cells{grid-template-columns:repeat(4,1fr); gap:7px}}
+
+/* progress: paw stamps */
+.paws{display:flex;justify-content:center;gap:6px;margin-bottom:14px;font-size:1rem}
+.paw{opacity:.18;transition:opacity .25s,transform .25s;display:inline-block;filter:grayscale(1)}
+.paw.done{opacity:1;filter:none}
+.paw.now{opacity:1;filter:none;transform:scale(1.4) rotate(12deg)}
+
+/* questions */
+.qnum{font-family:var(--cond); font-weight:700; letter-spacing:.2em; text-transform:uppercase; font-size:.72rem; color:var(--red); margin-bottom:6px}
+.question{
+  font-family:var(--cond); font-weight:700; font-size:clamp(1.3rem,5.2vw,1.7rem);
+  line-height:1.22; margin-bottom:18px; color:var(--ink); text-transform:uppercase; letter-spacing:.02em;
+}
+.answers{display:flex;flex-direction:column;gap:11px;margin-bottom:16px}
+.answer{
+  font-family:var(--type); font-size:.97rem; text-align:left; line-height:1.4;
+  background:var(--paper-light); color:var(--ink); border:2px solid var(--ink);
+  padding:13px 16px 13px 44px; cursor:pointer; min-height:52px; width:100%; position:relative;
+  box-shadow:3px 3px 0 rgba(27,26,23,.35);
+  transition:transform .12s, background .12s, box-shadow .12s;
+}
+.answer::before{ /* checkbox */
+  content:""; position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  width:18px; height:18px; border:2px solid var(--ink); background:#fff;
+}
+.answer:hover{background:#fff; transform:translate(-1px,-1px); box-shadow:5px 5px 0 rgba(27,26,23,.4)}
+.answer:hover::before{background:#FBE9E8}
+.answer:active{transform:translate(2px,2px); box-shadow:1px 1px 0 rgba(27,26,23,.4)}
+.answer.picked{background:#fff}
+.answer.picked::before{content:"✔"; color:var(--red); font-size:15px; line-height:14px; text-align:center; font-weight:700}
+
+/* buttons */
+.btn{
+  display:inline-block; font-family:var(--cond); font-weight:700; text-transform:uppercase; letter-spacing:.1em; font-size:1rem;
+  padding:13px 26px; cursor:pointer; text-decoration:none; border:2px solid var(--ink);
+  transition:transform .1s, box-shadow .1s;
+}
+.btn.primary{background:var(--red); color:#fff; box-shadow:0 5px 0 var(--red-deep)}
+.btn.primary:hover{transform:translateY(-2px); box-shadow:0 7px 0 var(--red-deep)}
+.btn.primary:active{transform:translateY(4px); box-shadow:0 1px 0 var(--red-deep)}
+.btn.secondary{background:var(--ink); color:var(--paper); box-shadow:0 5px 0 #000}
+.btn.secondary:hover{transform:translateY(-2px); box-shadow:0 7px 0 #000}
+.btn.secondary:active{transform:translateY(4px); box-shadow:0 1px 0 #000}
+.btn.fb{background:#1877F2; color:#fff; font-size:.92rem; padding:11px 20px; box-shadow:0 4px 0 #0E4DA4; border-color:#0E4DA4}
+.btn.fb:hover{transform:translateY(-2px); box-shadow:0 6px 0 #0E4DA4}
+.btn.fb:active{transform:translateY(3px); box-shadow:0 1px 0 #0E4DA4}
+.btn.quiet{background:none; border:none; color:var(--ink-soft); padding:10px 14px; font-size:.85rem; letter-spacing:.06em; text-decoration:underline; text-underline-offset:3px; box-shadow:none}
+.btn.quiet:hover{color:var(--red)}
+:focus-visible{outline:3px solid var(--red); outline-offset:2px}
+
+/* interstitial */
+.census{padding:50px 0}
+.siren{font-size:3rem; display:inline-block; animation:flash .7s ease-in-out infinite; margin-bottom:12px}
+@keyframes flash{0%,100%{opacity:1; filter:drop-shadow(0 0 0 rgba(184,35,31,0))}50%{opacity:.6; filter:drop-shadow(0 0 14px rgba(184,35,31,.9))}}
+.typing{font-family:var(--type); font-size:1rem; color:var(--ink-soft)}
+.typing::after{content:"▌"; animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ===== RESULT: the Inmate File ===== */
+.file{ text-align:left }
+.filetop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px}
+.filetop .dept{text-align:left; font-size:.68rem}
+.filetop .dept b{font-size:1.05rem}
+.wanted{ text-align:center; margin:4px 0 12px }
+.wanted .stamp{font-size:1.4rem}
+.wanted small{display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--red-stamp); margin-top:2px}
+
+.charge{
+  background:var(--ink); color:var(--paper); padding:12px 16px; margin:8px 0 16px; text-align:center;
+  font-family:var(--type); font-size:.95rem;
+}
+.charge b{display:block; font-family:var(--disp); font-size:1.5rem; letter-spacing:.06em; color:#F4E4B0; text-transform:uppercase; line-height:1.15}
+.charge span{opacity:.85}
+
+.mugwrap{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:14px; align-items:start; margin-bottom:14px}
+@media (max-width:520px){.mugwrap{grid-template-columns:1fr}}
+.mug{
+  position:relative; aspect-ratio:3/4; background:var(--wall); border:3px solid var(--ink); overflow:hidden;
+  background-image:repeating-linear-gradient(0deg, transparent 0 22px, var(--wall-line) 22px 24px);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.25);
+}
+.mug img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.mug .ticks{position:absolute; left:6px; top:8px; bottom:0; font-family:var(--cond); font-weight:700; font-size:.6rem; color:var(--ink); line-height:24px}
+.mug .ticks i{display:block; font-style:normal}
+.mug .sil{position:absolute; left:50%; bottom:22%; transform:translateX(-50%); font-size:5.2rem; opacity:.55; filter:grayscale(1) contrast(1.4)}
+.sign{
+  position:absolute; left:8%; right:8%; bottom:6%; padding:6px 6px 7px; text-align:center;
+  background:linear-gradient(180deg,var(--wood-light),var(--wood) 60%,var(--wood-dark)); border:2px solid var(--wood-dark);
+  color:#F6EAD0; box-shadow:0 4px 8px rgba(0,0,0,.45);
+  background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 3px, transparent 3px 11px), linear-gradient(180deg,var(--wood-light),var(--wood) 60%,var(--wood-dark));
+}
+.sign small{display:block; font-family:var(--cond); font-weight:700; font-size:.55rem; letter-spacing:.14em; text-transform:uppercase; opacity:.9}
+.sign b{display:block; font-family:var(--chalk); font-size:1.15rem; line-height:1.15; letter-spacing:.02em}
+.sign::before,.sign::after{content:""; position:absolute; top:-40px; width:2px; height:40px; background:repeating-linear-gradient(180deg,#333 0 4px,#999 4px 6px)}
+.sign::before{left:12%}.sign::after{right:12%}
+
+.fields{font-family:var(--type); font-size:.9rem; line-height:1.35}
+.fields dt{font-family:var(--cond); font-weight:700; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:7px}
+.fields dd{font-family:var(--cond); font-weight:700; font-size:1.02rem; text-transform:uppercase; letter-spacing:.02em; color:var(--ink); border-bottom:1px solid rgba(27,26,23,.35); padding-bottom:2px}
+.fields dd.name{font-family:var(--disp); font-size:1.7rem; color:var(--red); letter-spacing:.06em; border-bottom:2px solid var(--ink)}
+.fields dd.name small{font-family:var(--type); font-size:.85rem; color:var(--ink-soft); text-transform:none; letter-spacing:0}
+.fields dd.pending{color:var(--muted); font-family:var(--type); text-transform:none; font-weight:400; font-size:.85rem}
+
+.sec{margin-top:16px}
+.sechead{
+  font-family:var(--cond); font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:.8rem;
+  background:var(--ink); color:var(--paper); display:inline-block; padding:3px 12px; margin-bottom:8px;
+}
+.sechead.red{background:var(--red)}
+.report{list-style:none; columns:2; column-gap:18px; font-family:var(--cond); font-weight:700; text-transform:uppercase; font-size:.86rem; letter-spacing:.02em}
+@media (max-width:420px){.report{columns:1}}
+.report li{break-inside:avoid; padding-left:20px; position:relative; margin-bottom:5px}
+.report li::before{content:"🐾"; position:absolute; left:0; top:0; font-size:.75rem}
+.notes{font-family:var(--type); font-size:.93rem; line-height:1.6; color:var(--ink)}
+.notes p{margin-bottom:9px}
+.notes .parole{color:var(--red); font-weight:700}
+.reportwrap{display:flex; gap:12px; align-items:flex-start; justify-content:space-between}
+.reportwrap .stamp.round{flex:0 0 auto; margin-top:6px}
+
+.parole{margin-top:16px; border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); padding:12px 8px; text-align:center}
+.parole h3{font-family:var(--disp); font-size:1.35rem; letter-spacing:.06em; color:var(--ink)}
+.parole h3::before,.parole h3::after{content:"★"; color:var(--red); margin:0 .4em; font-size:.7em; vertical-align:middle}
+.parole p{font-family:var(--cond); font-weight:700; text-transform:uppercase; font-size:.8rem; letter-spacing:.06em; color:var(--red)}
+.parole .cond{font-family:var(--type); text-transform:none; letter-spacing:0; color:var(--ink-soft); font-size:.86rem; font-weight:400; margin-top:4px}
+
+.ctas{display:flex; flex-direction:column; gap:12px; align-items:center; margin:18px 0 22px; text-align:center}
+.ctas .lock{font-family:var(--cond); font-weight:700; text-transform:uppercase; font-size:.85rem; letter-spacing:.06em; color:var(--ink)}
+.ctas .lock b{color:var(--red)}
+.btnrow{display:flex; flex-wrap:wrap; justify-content:center; gap:6px}
+
+/* the rest of the block */
+.block{border-top:2px dashed rgba(27,26,23,.4); padding-top:16px; margin-bottom:6px; text-align:center}
+.blocklabel{font-family:var(--cond); font-weight:700; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:12px}
+.blockgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(78px,1fr)); gap:10px 6px}
+.inmate{display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none; color:var(--ink); font-family:var(--cond); font-weight:700; font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; background:none; border:0}
+.inmate .thumb{width:62px; height:74px; border:2px solid var(--ink); background:var(--wall); background-image:repeating-linear-gradient(0deg, transparent 0 9px, var(--wall-line) 9px 10px); display:flex; align-items:flex-end; justify-content:center; overflow:hidden; position:relative; transition:transform .15s}
+.inmate .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+.inmate .thumb i{font-style:normal; font-size:1.7rem; filter:grayscale(1); opacity:.6; margin-bottom:6px}
+.inmate .thumb em{position:absolute; left:4px; right:4px; bottom:4px; background:var(--wood); color:#F6EAD0; font-style:normal; font-family:var(--cond); font-size:.5rem; letter-spacing:.06em; padding:1px 0}
+.inmate:hover .thumb{transform:scale(1.06) rotate(-2deg); border-color:var(--red)}
+.inmate:hover span{color:var(--red)}
+
+.visit{border-top:2px dashed rgba(27,26,23,.4); padding-top:14px; font-size:.82rem; color:var(--ink-soft); text-align:center}
+.visit a{color:var(--ink); font-weight:700}
+footer{max-width:660px; margin:22px auto 0; text-align:center; font-size:.78rem; color:#C9BD9E; position:relative; z-index:1; font-family:var(--type)}
+footer a{color:#F4E4B0; font-weight:700}
+
+/* reveal cascade */
+.reveal-1,.reveal-2,.reveal-3,.reveal-4,.reveal-5{opacity:0; transform:translateY(12px); animation:rise .5s cubic-bezier(.2,1.2,.4,1) forwards}
+.reveal-2{animation-delay:.12s}.reveal-3{animation-delay:.3s}.reveal-4{animation-delay:.55s}.reveal-5{animation-delay:.85s}
+@keyframes rise{to{opacity:1; transform:translateY(0)}}
+.slam{animation:slam .45s cubic-bezier(.2,1.6,.4,1) .9s both}
+@keyframes slam{0%{transform:scale(2.4) rotate(-6deg); opacity:0}70%{transform:scale(.95) rotate(-6deg); opacity:1}100%{transform:scale(1) rotate(-6deg); opacity:.92}}
+
+/* typewriter */
+.tw-hide{visibility:hidden}
+.tw-cursor::after{content:"▌"; color:var(--red); animation:blink .8s steps(1) infinite; margin-left:1px}
+.later{opacity:0; transition:opacity .5s}
+.later.on{opacity:1}
+.mute{position:fixed; top:10px; right:10px; z-index:60; background:var(--ink); color:var(--paper); border:2px solid var(--paper); font-size:1rem; width:38px; height:38px; cursor:pointer; box-shadow:2px 2px 0 #000}
+.mute:hover{background:var(--red)}
+.skiphint{font-family:var(--cond); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-align:center; margin:-6px 0 8px}
+
+/* toast */
+.toast{position:fixed; left:50%; bottom:26px; transform:translate(-50%,16px); background:var(--ink); color:var(--paper); font-family:var(--cond); font-size:.9rem; font-weight:700; letter-spacing:.06em; padding:12px 22px; border:2px solid var(--paper); opacity:0; transition:opacity .35s, transform .35s; z-index:50; max-width:88vw; text-align:center}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+
+@media (max-width:480px){.stage{padding:26px 16px 22px} body{padding:14px 8px 34px}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important; transition:none !important} .reveal-1,.reveal-2,.reveal-3,.reveal-4,.reveal-5,.slam{opacity:1; transform:none}}
+</style>
+</head>
+<body>
+<main>
+  <div id="stage" class="stage" aria-live="polite">
+    <noscript><p>This quiz needs JavaScript — the inmates are real either way. Visit Last Chance Ranch on Facebook to apply for parole.</p></noscript>
+  </div>
+</main>
+<footer>
+  <p>Starring the very real inmates of <a href="#" id="footlink" target="_blank" rel="noopener">Last Chance Ranch</a> — Department of Pawctions</p>
+  <p>Not remotely scientific. The inmates, however, are 100% real and 100% eligible for parole.</p>
+</footer>
+<script>
+/* ===== Pawtner in Crime — data layer ===== */
+/* TODO: replace with the rescue's real Facebook page / application link */
+const LINKS = {
+  apply: "https://form.jotform.com/261266940400047",    // "Apply for Parole" — adoption application (JotForm)
+  page:  "https://www.facebook.com/",     // rescue's main page
+  foster: "https://form.jotform.com/261407369955064",   // Foster application (JotForm)
+  donate: "https://cash.app/$LastChanceRanchSC"          // "Post Bail" — Cash App
+};
+document.getElementById("footlink").href = LINKS.page;
+
+/* Mugshots go in mugshots/<key>.jpg — if the file is missing, a placeholder cell renders instead. */
+const MUGS = { liz:"mugshots/lizzy.jpg", blu:"mugshots/blue.jpg", isa:"mugshots/isaiah.jpg", oat:"mugshots/oatmeal.jpg",
+               san:"mugshots/sanders.jpg", ler:"mugshots/leroy.jpg", fro:"mugshots/frodo.jpg", pri:"mugshots/princess.jpg" };
+
+/* hidden:true removes a dog from scoring, the result, and the block grid (their answer points fall to the secondary dog). */
+const DOGS = {
+  oat: { num:"39", name:"Oatmeal", aka:"", rank:"Retired Legend · Door Greeter, First Class",
+    breed:"Lab mix", sex:"Male", age:"4 years", weight:"", status:"Half Way House — Home-to-Home Parole",
+    report:["Good with cats","Good with dogs","No food aggression","Loves people & attention","House training in progress","Mild leash pulling (settles)"],
+    notes:[
+      "Inmate #39 has a past. The Warden won't confirm the details, but the file mentions one legendary bank job, a getaway that involved a parachute, and a landing nobody at the Ranch has stopped talking about. Oatmeal, for his part, has retired from the heist business and taken up a quieter line of work: greeting people at doors like every one of them is the score of a lifetime.",
+      "In custody he has been a model inmate — gets along with dogs, gets along with cats, guards nothing but the doorway. He is still perfecting his house training and pulls a little on leash for the first block, then settles in like the pro he is. He doesn't need perfection. He needs a patient human and a soft place to land. He's had enough hard landings.",
+      "Booked 05/28/24. He has served his time. <span class='parole'>(PAROLE) is strongly recommended.</span>"],
+    conditions:"Patient home willing to finish house training. Home-to-home adoption — keeps this inmate out of the shelter system." },
+  blu: { num:"34", name:"Blue", aka:"Bleu", rank:"The Blue-Eyed Bandit · Yard Boss",
+    breed:"Catahoula Leopard Dog / mixed breed", sex:"Neutered male", age:"Approx. 2+ years", weight:"52.5 lbs", status:"General Population — Maximum Security Snuggles Unit",
+    report:["Very social","People friendly","Dog friendly","Loves to play and run","Kids: unknown","Cats: unknown"],
+    notes:[
+      "Inmate #34 is wanted in at least three counties for the same offense: making eye contact. Those eyes are ice-blue, they are legally a weapon, and Blue deploys them on every guard, volunteer, and visitor who comes down the row. Nobody has finished a shift without giving him a belly rub. Nobody.",
+      "Blue is serving time for circumstances beyond his control. Despite his past, he has proven to be a model inmate — very social, friendly with people and dogs, and a full-tilt believer that every yard time is the best day of his life. He runs like he's being paid per lap.",
+      "He's ready for early release into a committed home with structure, exercise, and a couch he's technically not allowed on. <span class='parole'>(PAROLE) is recommended.</span>"],
+    conditions:"Approved adopter willing to provide structure, exercise, and a lifelong commitment." },
+  isa: { num:"35", name:"Isaiah", aka:"", rank:"Snuggle Officer",
+    breed:"Labrador Retriever", sex:"Neutered male", age:"1½ years", weight:"51 lbs", status:"General Population — Maximum Security Snuggles Unit",
+    report:["Dog friendly","People friendly","Toy & food/treat motivated","Cat interested but not aggressive","Loves cuddles","Kids: unknown"],
+    notes:[
+      "Inmate #35 is what the file calls a smooth operator. Isaiah has stolen the hearts of staff and inmates alike with a charming personality, an irresistible smile, and cuddle skills that should honestly require a permit. He is always on his best behavior when treats or toys are involved — and he has figured out that treats or toys are always involved if he looks at you like that.",
+      "He is friendly with people, friendly with dogs, and merely <em>interested</em> in cats, which around here counts as restraint. Assigned rank: Snuggle Officer. He takes the title seriously.",
+      "Isaiah is ready for parole into a loving forever home. <span class='parole'>(PAROLE) is highly recommended.</span>"],
+    conditions:"Approved adopter willing to provide structure, exercise, treats, and a lifelong commitment." },
+  fro: { num:"52", name:"Frodo", aka:"", rank:"Ringbearer · Head of Napping",
+    breed:"Staffordshire Bull Terrier", sex:"Male", age:"Senior", weight:"", status:"Minimum Security — Eligible for Immediate Parole",
+    report:["Couch po-ta-to","Long naps a specialty","Daily cuddles (non-negotiable)","Calm & steady","Senior — quest complete","Dogs / kids / cats: ask the Warden"],
+    notes:[
+      "Meet Frodo, the bravest little hobbit this side of the Shire. Unlike his famous namesake, this Frodo has already completed his long journey and is ready to retire somewhere far more comfortable than Mordor. There has been some debate around the prison as to whether he is a Hobbit or a po-ta-to. The evidence is overwhelming: he is round, soft, happiest lounging, and has perfected the ancient art of doing absolutely nothing for hours at a time.",
+      "While other inmates cause shenanigans, Frodo has dedicated himself to becoming the finest couch po-ta-to in the entire Shire. His parole requirements are simple: a warm lap, plenty of naps, daily cuddles, and someone who understands that every great hero deserves a peaceful ending to his story.",
+      "He's looking for his own Grey Havens. <span class='parole'>(PAROLE) is highly recommended.</span>"],
+    conditions:"A warm lap worthy of the Shire. Long naps. Daily cuddles. A peaceful golden-years home." },
+  ler: { num:"51", name:"Leroy", aka:"", rank:"The Professional · Works Alone",
+    breed:"Terrier / American Pit Bull mix", sex:"Male", age:"4½ years", weight:"", status:"General Population — Solo Cell Assignment",
+    report:["Knows all basic commands","Smart & attentive","Loves working with his person","Fiercely loyal","Only pet — not dog or cat friendly","Kids: ask the Warden"],
+    notes:[
+      "Inmate #51 officially checked into the Last Chance Ranch Correctional Facility from Orangeburg, SC, and immediately established himself as a professional. Leroy already knows all of his basic commands. He is smart, attentive, and does his best work alongside one trusted human — the kind of partner who's already thought three moves ahead and doesn't need a crew.",
+      "Now, every inmate has a few conditions to their parole. Leroy's is simple: he prefers to be the only inmate in the cell block. He is not dog-friendly or cat-friendly — but he is incredibly loyal and devoted to his human. Once you earn his trust, you've got a best friend for life. That's not a limitation. That's a commitment.",
+      "<span class='parole'>(PAROLE) recommended</span> to a one-dog household ready for a partner, not a pet."],
+    conditions:"Only pet in the home. A person ready to earn his trust and keep it." },
+  san: { num:"42", name:"Sanders", aka:"", rank:"E Block Rookie · Reformed Side-Eye Specialist",
+    breed:"Mixed breed", sex:"Male", age:"", weight:"", status:"E Block — Rehabilitation in Progress",
+    report:["Came in shy — warming up","Housed with other dogs (E Block)","Couch time: mandatory","Netflix rehabilitation: ongoing","Kids / cats: ask the Warden","Best for a patient home"],
+    notes:[
+      "Inmate #42 was picked up roaming the streets of North Augusta with a lengthy rap sheet: resisting leashes, avoiding human interaction, suspicious side-eye activity, and possession of zero survival skills indoors. Sanders came in feral and unsure of this whole “being loved” program.",
+      "After transfer to E Block, he began serving his sentence of mandatory couch time, supervised Netflix rehabilitation, homemade prison meals, and emotional support from fellow inmates. Progress report: the side-eye is now mostly ironic. He is learning that hands are for petting, couches are for sharing, and people can be trusted — one at a time, on his schedule.",
+      "The right person for Sanders is patient, quiet, and unbothered by a slow burn. He'll get there. <span class='parole'>(PAROLE) recommended</span> to a home that lets him take his time."],
+    conditions:"A patient, calm home. Time to warm up. Couch access." },
+  liz: { num:"8", name:"Lizzy", aka:"Lizzie", rank:"H-Block Veteran · The Family Business", hidden:true,
+    pair:{ num:"9", name:"Thumper" },
+    breed:"Lab mix", sex:"Female", age:"", weight:"", status:"H-Block — Bonded Pair (must be paroled together)",
+    report:["Bonded with brother Thumper (#9)","Must be adopted together","Seasoned inmate — handles anything","Bickers over beds, forgets it for treats","Dog friendly (obviously)","Kids / cats: ask the Warden"],
+    notes:[
+      "The Warden reports that H-Block remains under the firm control of its resident sibling duo, Inmate #8 Lizzy and Inmate #9 Thumper. These two have perfected the art of sibling life: one minute inseparable, the next arguing over who gets the best bed, five minutes later back together like nothing happened. Deputies have determined that all disagreements are immediately forgotten if treats are involved.",
+      "They may bicker like siblings, but Lizzy and Thumper are a bonded pair and must be adopted together. They've spent their lives side by side, and separating them isn't an option. Their bond is unbreakable, and they deserve a home where they can continue their sentence together — keeping morale high and the snack budget completely out of control.",
+      "Case status: guilty of stealing hearts. <span class='parole'>(PAROLE) recommended — together.</span>"],
+    conditions:"Adopted together with Thumper (#9). Two beds. A generous snack budget." },
+  pri: { num:"", name:"Princess", aka:"Trophy", rank:"The Trophy · Every Heist Needs a Prize",
+    breed:"", sex:"Female", age:"", weight:"", status:"General Population — File Pending",
+    report:["Full file pending from the Warden","Ask about kids, dogs & cats","Reported: royalty"],
+    notes:[
+      "Inmate file pending. What the Warden's office will confirm: her name is Princess, her alias is Trophy, and both are accurate. She is not the getaway driver and she is not the lookout. She is what's in the vault — the reason the whole crew showed up.",
+      "Full Behavior Report and Warden's Notes are on their way. In the meantime, the charge stands: grand larceny of hearts, first degree.",
+      "<span class='parole'>(PAROLE) pending review.</span>"],
+    conditions:"To be determined by the Warden. Applications welcome now." }
+};
+
+/* charges — the "what you're in for" reveal. Each answer adds one tally; the top charge wins. */
+const CHARGES = {
+  cuddle: "Aggravated Cuddling",
+  sandwich: "Grand Theft Sandwich",
+  zoom: "Excessive Zoomies",
+  couch: "Loitering on Furniture",
+  nap: "Aggravated Napping",
+  bath: "Resisting Bathtime",
+  wag: "Disturbing the Peace (Tail-Related)",
+  greet: "Excessive Door Greetings",
+  sideeye: "Suspicious Side-Eye",
+  escape: "Escaping Custody (Fence-Related)",
+  loyal: "Aggravated Loyalty",
+  hearts: "Grand Larceny of Hearts",
+  balls: "Possession of Contraband (Tennis Balls)"
+};
+
+/* Each answer: [text, primaryDog(+2), secondaryDog(+1), charge] */
+const QUESTIONS = [
+  { q: "The heist is on. What's your role in the crew?", a: [
+    ["The mastermind. I work alone and I've already thought of everything.", "ler", "san", "loyal"],
+    ["The getaway driver. Fast, fearless, questionable parking.", "blu", "oat", "zoom"],
+    ["The smooth-talking inside man. Nobody suspects the charming one.", "isa", "pri", "hearts"],
+    ["Retired after the last job. I consult from the couch now.", "fro", "liz", "couch"] ] },
+  { q: "The alarm goes off mid-heist. You:", a: [
+    ["Skydive out the window. It worked last time.", "oat", "blu", "escape"],
+    ["Freeze. Side-eye everyone. Quietly reassess whether I trust this crew.", "san", "ler", "sideeye"],
+    ["Wag at the guards until they forget why they came.", "pri", "isa", "wag"],
+    ["Alarm? I was napping. Wake me when it's over.", "liz", "fro", "nap"] ] },
+  { q: "Your cell gets tossed. What contraband do they find?", a: [
+    ["Forty-seven tennis balls. Allegedly.", "blu", "isa", "balls"],
+    ["A snack stash, a well-worn TV remote, and a blanket that is not mine.", "oat", "san", "sandwich"],
+    ["Two beds. Both mine. My sibling disagrees.", "liz", "ler", "couch"],
+    ["A tiara. And a signed statement that I did nothing wrong.", "pri", "fro", "hearts"] ] },
+  { q: "How do you handle new cellmates?", a: [
+    ["Best friends in five minutes. Ten if they're boring.", "isa", "blu", "greet"],
+    ["Politely, from a distance. Trust is earned. Treats speed it up.", "san", "fro", "sideeye"],
+    ["Solo cell, thanks. My person is my whole crew.", "ler", "pri", "loyal"],
+    ["Depends. Are they family? Then we bicker constantly and love each other anyway.", "liz", "oat", "wag"] ] },
+  { q: "Yard time. What are you doing?", a: [
+    ["Running laps like I'm being paid per lap.", "blu", "oat", "zoom"],
+    ["Sun spot. Belly up. Zero regrets.", "pri", "fro", "nap"],
+    ["Training with my one trusted human. Eyes on them. Focus.", "ler", "san", "loyal"],
+    ["Greeting every single guard like it's a family reunion.", "isa", "oat", "greet"] ] },
+  { q: "The Warden offers a plea deal. What's your price?", a: [
+    ["Unlimited treats. I'll sign anything.", "liz", "isa", "sandwich"],
+    ["A soft couch, a warm blanket, and a human who understands naps.", "fro", "san", "cuddle"],
+    ["Full access to the yard. And the other yard. And the road.", "oat", "blu", "escape"],
+    ["A throne, obviously. And someone to fetch things.", "pri", "ler", "hearts"] ] },
+  { q: "Your rap sheet, honestly:", a: [
+    ["One legendary bank job. Retired now. Don't ask about the parachute.", "oat", "blu", "escape"],
+    ["Stealing hearts. Serial offender. Zero remorse.", "isa", "pri", "hearts"],
+    ["Resisting bathtime, resisting leashes, resisting being loved (working on it).", "san", "ler", "bath"],
+    ["Loitering on furniture across three counties.", "fro", "liz", "couch"] ] },
+  { q: "Last one — pick your parole conditions:", a: [
+    ["A patient human, a quiet house, and time to warm up.", "san", "oat", "cuddle"],
+    ["One person, all in. Loyal for life.", "ler", "isa", "loyal"],
+    ["Zoomies twice daily. Non-negotiable.", "blu", "liz", "zoom"],
+    ["A warm lap and a peaceful ending to a hero's story.", "fro", "pri", "cuddle"] ] }
+];
+
+/* ===== app ===== */
+const $ = s => document.querySelector(s);
+const stage = $("#stage");
+const ACTIVE = () => Object.keys(DOGS).filter(k => !DOGS[k].hidden);
+let answers = [];
+let current = 0;
+
+function setScreen(html, cls){
+  if (typeof twRun === "number") twRun++;      // stop any typewriter still running on the old screen
+  stage.className = "stage " + (cls || "");
+  stage.innerHTML = html;
+  const h = stage.querySelector("h1, h2");
+  if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+function header(){
+  return `<p class="dept">Last Chance Ranch<b>Department of Pawctions</b></p><div class="rule"></div>`;
+}
+
+/* ---------- intro ---------- */
+function showIntro(){
+  answers = []; current = 0;
+  const cells = ACTIVE().map(k => `<div class="cell"><i>?</i><span>Inmate ${DOGS[k].num ? "#" + DOGS[k].num : "#??"}</span></div>`).join("");
+  setScreen(`
+    ${header()}
+    <div class="filehead">Inmate File</div>
+    <p class="hook"><strong>Bonnie had Clyde. Thelma had Louise. Butch had Sundance.</strong></p>
+    <h1 class="title">Who's your <em>pawtner</em> in crime?</h1>
+    <p class="lede">${QUESTIONS.length === 8 ? "Eight" : QUESTIONS.length} questions. ${["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"][ACTIVE().length] || ACTIVE().length} very real inmates doing time at Last Chance Ranch for circumstances beyond their control. Get booked, find out what <em>you're</em> in for, and meet the one who'd take the fall for you.</p>
+    <div class="cells" aria-hidden="true">${cells}</div>
+    <button class="btn primary" onclick="showQuestion(0)">Book me 🚨</button>
+    <p class="fineprint">Takes about a minute. Zero science. One hundred percent real dogs, all eligible for parole.</p>
+  `, "intro");
+}
+
+/* ---------- questions ---------- */
+function showQuestion(i){
+  current = i;
+  const qq = QUESTIONS[i];
+  const paws = QUESTIONS.map((_, n) => `<span class="paw ${n < i ? "done" : ""} ${n === i ? "now" : ""}">🐾</span>`).join("");
+  const opts = qq.a.map((a, ai) => `<button class="answer ${answers[i] === ai ? "picked" : ""}" onclick="pick(${ai})">${a[0]}</button>`).join("");
+  setScreen(`
+    ${header()}
+    <p class="qnum">Booking form · Question ${i + 1} of ${QUESTIONS.length}</p>
+    <div class="paws" role="img" aria-label="Question ${i + 1} of ${QUESTIONS.length}">${paws}</div>
+    <h2 class="question">${qq.q}</h2>
+    <div class="answers">${opts}</div>
+    ${i > 0 ? `<button class="btn quiet" onclick="showQuestion(${i - 1})">← Back</button>` : ""}
+  `, "quiz");
+}
+function pick(ai){
+  answers[current] = ai;
+  if (current + 1 < QUESTIONS.length) showQuestion(current + 1);
+  else showInterstitial();
+}
+
+/* ---------- scoring ---------- */
+function computeWinner(){
+  const score = {}, charge = {};
+  ACTIVE().forEach(k => score[k] = 0);
+  answers.forEach((ai, qi) => {
+    const a = QUESTIONS[qi].a[ai];
+    let p = a[1], s = a[2];
+    if (DOGS[p].hidden) { p = s; }                 // hidden primary → secondary takes the +2
+    if (score[p] !== undefined) score[p] += 2;
+    if (s !== p && score[s] !== undefined) score[s] += 1;
+    charge[a[3]] = (charge[a[3]] || 0) + 1;
+  });
+  const best = Math.max(...Object.values(score));
+  const leaders = Object.keys(score).filter(k => score[k] === best);
+  const dog = leaders[Math.floor(Math.random() * leaders.length)];
+  const topC = Math.max(...Object.values(charge));
+  const cLeaders = Object.keys(charge).filter(k => charge[k] === topC);
+  return { dog, charge: cLeaders[0] };
+}
+
+/* ---------- reveal ---------- */
+function showInterstitial(){
+  setScreen(`
+    ${header()}
+    <div class="census">
+      <div class="siren" aria-hidden="true">🚨</div>
+      <h2 class="question">Processing your booking…</h2>
+      <p class="typing">Taking prints. Pulling the file. Notifying the Warden.</p>
+    </div>
+  `, "interstitial");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(showResult, reduce ? 250 : 1600);
+}
+
+function mugshot(key, d){
+  const label = d.pair ? `${d.name} &amp; ${d.pair.name}` : d.name;
+  const num = d.pair ? `#${d.num} &amp; #${d.pair.num}` : (d.num ? `#${d.num}` : "#??");
+  return `<div class="mug">
+    <div class="ticks" aria-hidden="true"><i>2'2"</i><i>2'1"</i><i>2'0"</i><i>1'11"</i><i>1'10"</i><i>1'9"</i></div>
+    <span class="sil" aria-hidden="true">🐕</span>
+    <img id="mugimg" src="${MUGS[key] || ""}" alt="Mugshot of ${d.name}" onerror="this.style.display='none'">
+    <div class="sign"><small>Last Chance Ranch Prison</small><b>Inmate ${num}<br>${label}</b></div>
+  </div>`;
+}
+function field(label, val, cls){
+  return `<dt>${label}</dt><dd class="${cls || ""}${val ? "" : " pending"}">${val || "pending"}</dd>`;
+}
+
+let lastCharge = "hearts";
+function showResult(fixedKey){
+  let key, charge;
+  if (fixedKey) { key = fixedKey; charge = lastCharge; }
+  else { ({ dog: key, charge } = computeWinner()); lastCharge = charge; }
+  const d = DOGS[key];
+  const report = d.report.map(c => `<li>${c}</li>`).join("");
+  const notes = d.notes.map(p => `<p>${p}</p>`).join("");
+  const others = ACTIVE().filter(k => k !== key).map(k => {
+    const o = DOGS[k];
+    return `<button class="inmate" onclick="showDog('${k}')" title="View ${o.name}'s file">
+      <span class="thumb"><i>🐕</i><img src="${MUGS[k] || ""}" alt="" loading="lazy" onerror="this.remove()"><em>#${o.num || "??"}</em></span>
+      <span>${o.name}</span></button>`;
+  }).join("");
+  const displayName = d.pair ? `${d.name} &amp; ${d.pair.name}` : d.name;
+  const numLine = d.pair ? `Inmates #${d.num} &amp; #${d.pair.num}` : (d.num ? `Inmate #${d.num}` : "Inmate #pending");
+  const goodStamp = d.sex === "Female" ? "Good Girl" : "Good Boy";
+  setScreen(`
+    <div class="file">
+      <div class="filetop">
+        <p class="dept">Last Chance Ranch<b>Department of Pawctions</b></p>
+        <span class="stamp sm tilt-r later" data-step="0">Booked</span>
+      </div>
+      <p class="skiphint">Tap anywhere to skip the typing</p>
+      <div class="charge">
+        <span class="tw">Booking complete. You are hereby charged with</span>
+        <b class="tw">${CHARGES[charge]}</b>
+      </div>
+      <div class="wanted later" data-step="1"><span class="stamp lg slam">Wanted</span><small>for a better life — together</small></div>
+      <h1 class="title tw" style="text-align:center">Your pawtner in crime is <em>${displayName}</em></h1>
+      <div class="mugwrap">
+        <div class="later" data-step="2">${mugshot(key, d)}</div>
+        <dl class="fields">
+          ${field("Name", `${d.name}${d.aka ? ` <small>(aka “${d.aka}”)</small>` : ""}`, "name tw")}
+          ${field("Inmate No.", numLine.replace(/^Inmates? /, ""), "tw")}
+          ${field("Rank", d.rank, "tw")}
+          ${field("Breed", d.breed, "tw")}
+          ${field("Status", d.sex, "tw")}
+          ${field("Age", d.age, "tw")}
+          ${field("Weight", d.weight, "tw")}
+          ${field("Custody", d.status, "tw")}
+        </dl>
+      </div>
+      <div class="sec">
+        <span class="sechead later" data-step="3">Behavior Report</span>
+        <div class="reportwrap">
+          <ul class="report">${report.replace(/<li>/g, '<li class="tw">')}</ul>
+          <span class="stamp round later" data-step="4">★ ${goodStamp} ★</span>
+        </div>
+      </div>
+      <div class="sec">
+        <span class="sechead red later" data-step="5">Warden's Notes</span>
+        <div class="notes">${notes.replace(/<p>/g, '<p class="tw">')}</div>
+      </div>
+      <div class="parole later" data-step="6">
+        <h3>Parole Eligibility</h3>
+        <p>Approved adopter willing to provide structure, exercise, and a lifelong commitment.</p>
+        <p class="cond"><strong>Conditions of parole:</strong> ${d.conditions}</p>
+      </div>
+      <div class="ctas later" data-step="7">
+        <p class="lock">🔒 Help <b>${displayName}</b> break free from the system and start a new life</p>
+        <a class="btn primary" href="${LINKS.apply}" target="_blank" rel="noopener">Apply for Parole Today</a>
+        <div class="btnrow">
+          <a class="btn secondary" href="${LINKS.donate}" target="_blank" rel="noopener">Post Bail 💵</a>
+          <a class="btn secondary" href="${LINKS.foster}" target="_blank" rel="noopener">Foster (Halfway House)</a>
+        </div>
+        <div class="btnrow">
+          <button class="btn fb" onclick="shareFB('${key}')">Share on Facebook 📣</button>
+        </div>
+        <div class="btnrow">
+          <button class="btn quiet" onclick="shareResult('${key}','${charge}')">Share another way</button>
+          <button class="btn quiet" onclick="showIntro()">Get booked again</button>
+        </div>
+      </div>
+      <div class="block later" data-step="8">
+        <p class="blocklabel">The rest of the cell block — all real, all awaiting parole</p>
+        <div class="blockgrid">${others}</div>
+      </div>
+      <div class="visit later" data-step="8">
+        <p><strong>Last Chance Ranch</strong> · Department of Pawctions<br>
+        A small no-kill rescue in South Carolina. Every inmate leaves alive.<br>
+        <a href="tel:+18034798408">(803) 479-8408</a> · <a href="mailto:lastchanceranchofsc@gmail.com">lastchanceranchofsc@gmail.com</a> · <a href="${LINKS.page}" target="_blank" rel="noopener">Facebook</a></p>
+      </div>
+    </div>
+  `, "result");
+  runTypewriter();
+}
+
+/* ---------- typewriter engine ---------- */
+const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let twRun = 0;                     // increments to cancel an in-flight run
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+let muted = store.get("pic-muted") === "1";
+let actx = null;
+
+function ensureAudio(){
+  if (muted || REDUCE) return null;
+  try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === "suspended") actx.resume(); } catch(e){ return null; }
+  return actx;
+}
+/* Optional real samples: drop files in sounds/ (key.mp3|wav, ding.mp3|wav, stamp.mp3|wav). Falls back to synth if missing. */
+const SAMPLES = { key: null, ding: null, stamp: null };
+(function loadSamples(){
+  const c = (() => { try { return new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ return null; } })();
+  if (!c) return; actx = c;
+  ["key","ding","stamp"].forEach(name => {
+    ["mp3","wav","ogg"].reduce((p, ext) => p.then(ok => ok || fetch(`sounds/${name}.${ext}`).then(r => r.ok ? r.arrayBuffer() : Promise.reject())
+      .then(ab => c.decodeAudioData(ab)).then(buf => { SAMPLES[name] = buf; return true; }).catch(() => false)), Promise.resolve(false));
+  });
+})();
+function playSample(name, gainVal, rateJitter){
+  const c = ensureAudio(); if (!c || !SAMPLES[name]) return false;
+  const src = c.createBufferSource(); src.buffer = SAMPLES[name];
+  src.playbackRate.value = 1 + (Math.random() * 2 - 1) * (rateJitter || 0);
+  const g = c.createGain(); g.gain.value = gainVal || 1;
+  src.connect(g); g.connect(c.destination); src.start();
+  return true;
+}
+function click(){                  // one typewriter key strike
+  if (playSample("key", 0.9, 0.08)) return;
+  const c = ensureAudio(); if (!c) return;
+  const len = Math.floor(c.sampleRate * 0.045);
+  const buf = c.createBuffer(1, len, c.sampleRate), data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.5);
+  const src = c.createBufferSource(); src.buffer = buf;
+  const f = c.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 520 + Math.random() * 260; f.Q.value = 0.9;
+  const lo = c.createBiquadFilter(); lo.type = "lowpass"; lo.frequency.value = 1400;
+  const g = c.createGain(); g.gain.value = 0.42 + Math.random() * 0.15;
+  src.connect(f); f.connect(lo); lo.connect(g); g.connect(c.destination); src.start();
+}
+function ding(){                   // carriage-return bell
+  if (playSample("ding", 0.8, 0)) return;
+  const c = ensureAudio(); if (!c) return;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = "sine"; o.frequency.value = 980;
+  g.gain.setValueAtTime(0.14, c.currentTime); g.gain.exponentialRampToValueAtTime(0.0008, c.currentTime + 0.5);
+  o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime + 0.5);
+}
+function stampSound(){             // rubber stamp thud
+  if (playSample("stamp", 1, 0.05)) return;
+  const c = ensureAudio(); if (!c) return;
+  const len = Math.floor(c.sampleRate * 0.09);
+  const buf = c.createBuffer(1, len, c.sampleRate), data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+  const src = c.createBufferSource(); src.buffer = buf;
+  const f = c.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = 320;
+  const g = c.createGain(); g.gain.value = 0.9;
+  src.connect(f); f.connect(g); g.connect(c.destination); src.start();
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* type an element's content in place, preserving inline tags */
+async function typeInto(el, run, cps){
+  const tpl = el.cloneNode(true);
+  el.innerHTML = ""; el.classList.remove("tw-hide"); el.classList.add("tw-cursor");
+  let n = 0;
+  async function walk(src, dst){
+    for (const node of Array.from(src.childNodes)){
+      if (twRun !== run) return;
+      if (node.nodeType === 3){
+        const t = document.createTextNode(""); dst.appendChild(t);
+        for (const ch of node.nodeValue){
+          if (twRun !== run) return;
+          t.nodeValue += ch;
+          if (ch !== " " && (n++ % 2 === 0)) click();
+          await sleep(cps + (ch === "." || ch === "," ? 90 : 0));
+        }
+      } else {
+        const c = node.cloneNode(false); dst.appendChild(c); await walk(node, c);
+      }
+    }
+  }
+  await walk(tpl, el);
+  el.classList.remove("tw-cursor");
+}
+function showStep(i){
+  document.querySelectorAll(`.later[data-step="${i}"]`).forEach(e => e.classList.add("on"));
+}
+function finishAll(){
+  twRun++;
+  document.querySelectorAll(".tw-hide").forEach(e => e.classList.remove("tw-hide"));
+  document.querySelectorAll(".tw-cursor").forEach(e => e.classList.remove("tw-cursor"));
+  document.querySelectorAll(".later").forEach(e => e.classList.add("on"));
+  const h = document.querySelector(".skiphint"); if (h) h.remove();
+}
+async function runTypewriter(){
+  const run = ++twRun;
+  const targets = Array.from(document.querySelectorAll(".tw"));
+  if (REDUCE){ finishAll(); return; }
+  targets.forEach(e => e.classList.add("tw-hide"));
+  const originals = new Map(targets.map(e => [e, e.innerHTML]));
+  const restoreIfCancelled = () => { if (twRun !== run) { originals.forEach((html, e) => { e.innerHTML = html; e.classList.remove("tw-hide","tw-cursor"); }); return true; } return false; };
+  const skip = () => { if (twRun === run) { twRun++; originals.forEach((html, e) => { e.innerHTML = html; }); finishAll(); } };
+  stage.addEventListener("click", skip, { once: true });
+
+  await sleep(350); if (restoreIfCancelled()) return;
+  showStep(0); stampSound();
+  await sleep(300);
+  // charge line + charge
+  for (const el of targets.filter(e => e.closest(".charge"))) { await typeInto(el, run, 26); if (restoreIfCancelled()) return; }
+  ding(); await sleep(400);
+  showStep(1); stampSound();               // WANTED slams
+  await sleep(700);
+  const title = targets.find(e => e.classList.contains("title"));
+  if (title) { await typeInto(title, run, 34); if (restoreIfCancelled()) return; }
+  ding(); showStep(2);                       // mugshot fades in
+  await sleep(500);
+  for (const el of targets.filter(e => e.closest(".fields"))) { await typeInto(el, run, 22); if (restoreIfCancelled()) return; await sleep(60); }
+  ding(); await sleep(300);
+  showStep(3);
+  for (const el of targets.filter(e => e.closest(".report"))) { await typeInto(el, run, 16); if (restoreIfCancelled()) return; await sleep(80); }
+  showStep(4); stampSound();                 // GOOD BOY stamp
+  await sleep(500);
+  showStep(5);
+  for (const el of targets.filter(e => e.closest(".notes"))) { await typeInto(el, run, 9); if (restoreIfCancelled()) return; ding(); await sleep(250); }
+  showStep(6); await sleep(350);
+  showStep(7); await sleep(250);
+  showStep(8);
+  const h = document.querySelector(".skiphint"); if (h) h.remove();
+  stage.removeEventListener("click", skip);
+}
+(function muteButton(){
+  const b = document.createElement("button");
+  b.className = "mute"; b.title = "Sound on/off"; b.setAttribute("aria-label", "Toggle typewriter sound");
+  const paint = () => b.textContent = muted ? "🔇" : "🔊";
+  paint();
+  b.onclick = () => { muted = !muted; store.set("pic-muted", muted ? "1" : "0"); paint(); if (!muted) ensureAudio(); };
+  document.body.appendChild(b);
+})();
+
+/* view another dog's file without retaking (keeps your charge) */
+function showDog(key){ showResult(key); }
+
+/* ---------- share ---------- */
+function shareUrl(key){ return new URL("share/" + key + ".html", location.href).href; }
+function shareFB(key){
+  window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl(key)), "_blank", "noopener,width=626,height=436");
+}
+function shareResult(key, charge){
+  const d = DOGS[key];
+  const name = d.pair ? `${d.name} & ${d.pair.name}` : d.name;
+  const text = `Bonnie had Clyde. I've got ${name}, Inmate #${d.num || "??"} — and I'm in for ${CHARGES[charge]}. 🚨🐾 Every one of these inmates is real and awaiting parole at Last Chance Ranch. Who's your pawtner in crime?`;
+  const url = shareUrl(key);
+  if (navigator.share) navigator.share({ title: "Who's Your Pawtner in Crime?", text, url }).catch(() => {});
+  else if (navigator.clipboard) navigator.clipboard.writeText(text + " " + url).then(() => toast("Copied — paste it anywhere 🚨"));
+  else toast("Copy the page link to share");
+}
+function toast(msg){
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.classList.add("show"), 20);
+  setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 400); }, 2600);
+}
+
+showIntro();
+</script>
+</body>
+</html>
