@@ -658,7 +658,7 @@ function showResult(fixedKey){
   }).join("");
   const displayName = d.pair ? `${d.name} &amp; ${d.pair.name}` : d.name;
   const numLine = d.pair ? `Inmates #${d.num} &amp; #${d.pair.num}` : (d.num ? `Inmate #${d.num}` : "Inmate #pending");
-  const goodStamp = d.sex === "Female" ? "Good Girl" : "Good Boy";
+  const goodStamp = /female/i.test(d.sex || "") ? "Good Girl" : "Good Boy";
   setScreen(`
     <div class="file">
       <div class="filetop">
