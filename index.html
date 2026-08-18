@@ -564,9 +564,9 @@ async function runQuestionTypewriter(nAnswers){
   const skip = () => { if (twRun === run) { twRun++; q.innerHTML = original; finishAll(); } };
   armSkip(skip);
   await sleep(150); if (cancelled()) return;
-  await typeInto(q, run, 22); if (cancelled()) return;
-  ding(); await sleep(200);
-  for (let k = 0; k < nAnswers; k++) { showStep("a" + k); stampSound(); await sleep(190); if (cancelled()) return; }
+  await typeInto(q, run, 45); if (cancelled()) return;
+  ding(); await sleep(450);
+  for (let k = 0; k < nAnswers; k++) { showStep("a" + k); stampSound(); await sleep(420); if (cancelled()) return; }
   showStep("back");
   stage.removeEventListener("click", skip);
 }
