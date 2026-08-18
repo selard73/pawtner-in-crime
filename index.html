@@ -190,7 +190,8 @@ h1:focus,h2:focus{outline:none}
   box-shadow:inset 0 0 30px rgba(0,0,0,.25);
 }
 .mug img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; display:block}
-.mug.has .ticks,.mug.has .sil,.mug.has .sign{display:none}
+.mug.has .ticks,.mug.has .sil{display:none}
+.mug.has.real .sign{display:none}
 .mug .ticks{position:absolute; left:6px; top:8px; bottom:0; font-family:var(--cond); font-weight:700; font-size:.6rem; color:var(--ink); line-height:24px}
 .mug .ticks i{display:block; font-style:normal}
 .mug .sil{position:absolute; left:50%; bottom:22%; transform:translateX(-50%); font-size:5.2rem; opacity:.55; filter:grayscale(1) contrast(1.4)}
@@ -348,7 +349,7 @@ const MUGS = { liz:"mugshots/lizzy.jpg", blu:"mugshots/blue.jpg", isa:"mugshots/
 
 /* hidden:true removes a dog from scoring, the result, and the block grid (their answer points fall to the secondary dog). */
 const DOGS = {
-  oat: { num:"39", name:"Oatmeal", aka:"", rank:"Retired Legend · Door Greeter, First Class",
+  oat: { num:"39", name:"Oatmeal", aka:"", rank:"Retired Legend · Door Greeter, First Class", mug:true,
     breed:"Lab mix", sex:"Male", age:"4 years", weight:"", status:"Half Way House — Home-to-Home Parole",
     report:["Good with cats","Good with dogs","No food aggression","Loves people & attention","House training in progress","Mild leash pulling (settles)"],
     notes:[
@@ -372,7 +373,7 @@ const DOGS = {
       "He is <strong>friendly with people, friendly with dogs</strong>, and merely <em>interested</em> in cats, which around here counts as restraint. Assigned rank: <strong>Snuggle Officer.</strong> He takes the title seriously.",
       "Isaiah is ready for parole into a loving forever home. <span class='rec'>(PAROLE) is highly recommended.</span>"],
     conditions:"Approved adopter willing to provide structure, exercise, treats, and a lifelong commitment." },
-  fro: { num:"52", name:"Frodo", aka:"", rank:"Ringbearer · Head of Napping",
+  fro: { num:"52", name:"Frodo", aka:"", rank:"Ringbearer · Head of Napping", mug:true,
     breed:"Staffordshire Bull Terrier", sex:"Male", age:"Senior", weight:"", status:"Minimum Security — Eligible for Immediate Parole",
     report:["Couch po-ta-to","Long naps a specialty","Daily cuddles (non-negotiable)","Calm & steady","Senior — quest complete","Dogs / kids / cats: ask the Warden"],
     notes:[
@@ -388,7 +389,7 @@ const DOGS = {
       "Now, every inmate has a few conditions to their parole. Leroy's is simple: <strong>he prefers to be the only inmate in the cell block.</strong> He is not dog-friendly or cat-friendly — but he is incredibly loyal and devoted to his human. Once you earn his trust, <strong>you've got a best friend for life.</strong> That's not a limitation. That's a commitment.",
       "<span class='rec'>(PAROLE) recommended</span> to a one-dog household ready for a partner, not a pet."],
     conditions:"Only pet in the home. A person ready to earn his trust and keep it." },
-  san: { num:"42", name:"Sanders", aka:"", rank:"E Block Rookie · Reformed Side-Eye Specialist",
+  san: { num:"42", name:"Sanders", aka:"", rank:"E Block Rookie · Reformed Side-Eye Specialist", mug:true,
     breed:"Mixed breed", sex:"Male", age:"", weight:"", status:"E Block — Rehabilitation in Progress",
     report:["Came in shy — warming up","Housed with other dogs (E Block)","Couch time: mandatory","Netflix rehabilitation: ongoing","Kids / cats: ask the Warden","Best for a patient home"],
     notes:[
@@ -396,7 +397,7 @@ const DOGS = {
       "After transfer to E Block, he began serving his sentence of <strong>mandatory couch time, supervised Netflix rehabilitation</strong>, homemade prison meals, and emotional support from fellow inmates. Progress report: <strong>the side-eye is now mostly ironic.</strong> He is learning that hands are for petting, couches are for sharing, and people can be trusted — one at a time, on his schedule.",
       "The right person for Sanders is <strong>patient, quiet, and unbothered by a slow burn.</strong> He'll get there. <span class='rec'>(PAROLE) recommended</span> to a home that lets him take his time."],
     conditions:"A patient, calm home. Time to warm up. Couch access." },
-  liz: { num:"8", name:"Lizzy", aka:"Lizzie", rank:"H-Block Veteran · The Family Business", hidden:true,
+  liz: { num:"8", name:"Lizzy", aka:"Lizzie", rank:"H-Block Veteran · The Family Business", mug:true, hidden:true,
     pair:{ num:"9", name:"Thumper" },
     breed:"Lab mix", sex:"Female", age:"", weight:"", status:"H-Block — Bonded Pair (must be paroled together)",
     report:["Bonded with brother Thumper (#9)","Must be adopted together","Seasoned inmate — handles anything","Bickers over beds, forgets it for treats","Dog friendly (obviously)","Kids / cats: ask the Warden"],
@@ -405,7 +406,7 @@ const DOGS = {
       "They may bicker like siblings, but Lizzy and Thumper are <strong>a bonded pair and must be adopted together.</strong> They've spent their lives side by side, and separating them isn't an option. Their bond is unbreakable, and they deserve a home where they can continue their sentence together — keeping morale high and the snack budget completely out of control.",
       "Case status: guilty of stealing hearts. <span class='rec'>(PAROLE) recommended — together.</span>"],
     conditions:"Adopted together with Thumper (#9). Two beds. A generous snack budget." },
-  pri: { num:"16", name:"Princess", aka:"Trophy", rank:"Her Majesty · Sovereign of Snacks",
+  pri: { num:"16", name:"Princess", aka:"Trophy", rank:"Her Majesty · Sovereign of Snacks", mug:true,
     breed:"German Shepherd", sex:"Spayed female", age:"8+ years (senior)", weight:"60 lbs", status:"Royal Wing — Solo Cell by Decree",
     link:"https://www.petfinder.com/dog/princess-aka-trophy-e36836dc-6534-4910-a3e9-5a9cd5e692eb/sc/aiken/last-chance-ranch-of-south-carolina-sc10004/details/",
     report:["Loves snacks (all of them)","Knows basic commands","Walks great on a leash","Only animal — no other pets","No small children","Senior — calm & regal"],
@@ -631,7 +632,7 @@ function showInterstitial(){
 function mugshot(key, d){
   const label = d.pair ? `${d.name} &amp; ${d.pair.name}` : d.name;
   const num = d.pair ? `#${d.num} &amp; #${d.pair.num}` : (d.num ? `#${d.num}` : "#??");
-  return `<div class="mug">
+  return `<div class="mug${d.mug ? " real" : ""}">
     <div class="ticks" aria-hidden="true"><i>2'2"</i><i>2'1"</i><i>2'0"</i><i>1'11"</i><i>1'10"</i><i>1'9"</i></div>
     <span class="sil" aria-hidden="true">🐕</span>
     <img id="mugimg" src="${MUGS[key] || ""}" alt="Mugshot of ${d.name}" onload="this.parentNode.classList.add('has')" onerror="this.style.display='none'">
