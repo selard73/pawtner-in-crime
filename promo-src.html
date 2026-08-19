@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#2A2723}
+.card{width:1080px;height:1920px;position:relative;overflow:hidden;background:#EAE0C8;color:#1B1A17;font-family:'Special Elite',monospace;
+ display:flex;flex-direction:column;align-items:center;padding:64px 60px 48px;
+ background-image:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.35),transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(120,90,40,.16),transparent 50%),repeating-linear-gradient(0deg,rgba(0,0,0,.025) 0 1px,transparent 1px 3px)}
+.card::before{content:"";position:absolute;inset:22px;border:3px dashed rgba(60,45,20,.3);pointer-events:none}
+.dept{margin:0;text-align:center;font-family:'Oswald';font-weight:700;letter-spacing:.24em;text-transform:uppercase;font-size:24px;color:#3B3830}
+.dept b{display:block;font-family:'Anton';font-weight:400;letter-spacing:.1em;font-size:40px;color:#1B1A17;margin-top:2px}
+.dept::before{content:"★ ";color:#B8231F}
+.rule{width:560px;height:5px;background:#1B1A17;margin:12px 0 22px;position:relative}
+.rule::after{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:#1B1A17}
+.hook{margin:0 0 14px;text-align:center;font-size:31px;line-height:1.35;font-weight:700;color:#1B1A17}
+.title{margin:0 0 40px;text-align:center;font-family:'Anton';font-size:106px;line-height:.95;color:#B8231F;text-transform:uppercase;letter-spacing:.02em;text-shadow:4px 4px 0 rgba(0,0,0,.12)}
+.title em{font-style:normal;color:#1B1A17}
+.wall{position:relative;width:860px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px 22px;margin:6px 0 40px}
+.wall .cell{aspect-ratio:5/6;border:5px solid #1B1A17;overflow:hidden;background:#B9B7B0;box-shadow:0 10px 22px rgba(0,0,0,.28)}
+.wall img{width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+.stamp{position:absolute;right:-30px;top:-58px;z-index:2;font-family:'Anton';font-size:58px;letter-spacing:.08em;text-transform:uppercase;color:#C4302B;border:8px double #C4302B;padding:2px 20px;line-height:1;transform:rotate(11deg);opacity:.92;mix-blend-mode:multiply;background:rgba(234,224,200,.7)}
+.stamp small{display:block;font-family:'Oswald';font-weight:700;font-size:17px;letter-spacing:.14em;text-align:center}
+.sub{margin:0 0 26px;text-align:center;font-size:29px;line-height:1.45;color:#3B3830;max-width:900px}
+.sub b{color:#1B1A17}
+.btn{font-family:'Oswald';font-weight:700;font-size:50px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:#B8231F;border:5px solid #1B1A17;padding:16px 80px;box-shadow:0 10px 0 #8E1814;margin-bottom:26px}
+.url{margin:0;text-align:center;font-family:'Oswald';font-weight:700;font-size:46px;letter-spacing:.05em;color:#1B1A17}
+.foot{margin:auto 0 0;text-align:center;font-family:'Oswald';font-weight:700;font-size:19px;letter-spacing:.2em;text-transform:uppercase;color:#6B655A}
+</style></head><body>
+<div class="card">
+  <p class="dept">Last Chance Ranch<b>Department of Pawctions</b></p>
+  <div class="rule"></div>
+  <p class="hook">Bonnie had Clyde. Thelma had Louise.<br>Butch had Sundance.</p>
+  <h1 class="title">Who's your<br><em>pawtner</em> in crime?</h1>
+  <div class="wall">
+    <div class="stamp">Wanted<small>for a better life</small></div>
+    <div class="cell"><img src="mugshots/princess.jpg"></div>
+    <div class="cell"><img src="mugshots/leroy.jpg"></div>
+    <div class="cell"><img src="mugshots/sanders.jpg"></div>
+    <div class="cell"><img src="mugshots/frodo.jpg"></div>
+  </div>
+  <p class="sub">8 questions. Real inmates. <b>Get booked, find out what you're in for,</b> and meet the one who'd take the fall for you.</p>
+  <div class="btn">Book Me 🚨</div>
+  <p class="url">pawtner-in-crime.onrender.com</p>
+  <p class="foot">Last Chance Ranch of South Carolina · Aiken, SC · Every inmate leaves alive 🐾</p>
+</div>
+</body></html>

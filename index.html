@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-THGVTYNHDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-THGVTYNHDX');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Who's Your Pawtner in Crime? 🚨🐾</title>
 <meta name="description" content="Bonnie had Clyde. Thelma had Louise. Butch had Sundance. Take the Last Chance Ranch booking quiz, find out what you're in for, and meet the inmate who'd take the fall for you.">
@@ -552,6 +560,7 @@ async function runIntroSequence(nCells){
 
 /* ---------- questions ---------- */
 function showQuestion(i){
+  if (i === 0 && typeof gtag === "function") gtag("event", "quiz_start");
   current = i;
   const qq = QUESTIONS[i];
   const paws = QUESTIONS.map((_, n) => `<span class="paw ${n < i ? "done" : ""} ${n === i ? "now" : ""}">🐾</span>`).join("");
@@ -650,7 +659,7 @@ let lastCharge = "hearts";
 function showResult(fixedKey){
   let key, charge;
   if (fixedKey) { key = fixedKey; charge = lastCharge; }
-  else { ({ dog: key, charge } = computeWinner()); lastCharge = charge; }
+  else { ({ dog: key, charge } = computeWinner()); lastCharge = charge; if (typeof gtag === "function") gtag("event", "quiz_complete", { dog: key, dog_name: DOGS[key].name, charge: charge }); }
   const d = DOGS[key];
   const report = d.report.map(c => `<li>${c}</li>`).join("");
   const notes = d.notes.map(p => `<p>${p}</p>`).join("");
@@ -707,7 +716,7 @@ function showResult(fixedKey){
       </div>
       <div class="ctas later" data-step="7">
         <p class="lock">🔒 Help <b>${displayName}</b> break free from the system and start a new life</p>
-        <a class="btn primary" href="${LINKS.apply}" target="_blank" rel="noopener">Apply for Parole Today</a>
+        <a class="btn primary" href="${LINKS.apply}" target="_blank" rel="noopener" onclick="track('apply_click','${key}')">Apply for Parole Today</a>
         ${d.link ? `<a class="btn secondary" href="${d.link}" target="_blank" rel="noopener">${d.pair ? "Their" : (d.sex && d.sex.toLowerCase().includes("female") ? "Her" : "His")} file & video on Petfinder 🎬</a>` : ""}
         <div class="btnrow">
           <a class="btn secondary" href="${LINKS.donate}" target="_blank" rel="noopener">Post Bail 💵</a>
@@ -926,10 +935,13 @@ function showDog(key){ showResult(key); }
 
 /* ---------- share ---------- */
 function shareUrl(key){ return new URL("share/" + key + ".html", location.href).href; }
+function track(name, key){ if (typeof gtag === "function") gtag("event", name, { dog: key || "" }); }
 function shareFB(key){
+  track("share_facebook", key);
   window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl(key)), "_blank", "noopener,width=626,height=436");
 }
 function shareResult(key, charge){
+  track("share_other", key);
   const d = DOGS[key];
   const name = d.pair ? `${d.name} & ${d.pair.name}` : d.name;
   const text = `Bonnie had Clyde. I've got ${name}, Inmate #${d.num || "??"} — and I'm in for ${CHARGES[charge]}. 🚨🐾 Every one of these inmates is real and awaiting parole at Last Chance Ranch. Who's your pawtner in crime?`;
